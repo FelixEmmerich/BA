@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -7,18 +8,17 @@ namespace GameMechanism
 {
     public class InformationFilter : MonoBehaviour
     {
-
+        [Serializable]
         public struct Filter
         {
             public float MaxDistance;
+            public float MinDistance;
             [Tooltip("If the user is between MinDistance and MaxDistance, this event will be invoked once (reset when the user gets outside the range).")]
             public UnityEvent WithinRangeEvent;
-            public float MinDistance;
             [Tooltip("Invoked once if the user is closer than MinDistance or further than MaxDistance. Can be used to undo the effects of WithinRangeEvent. Reset when the user gets within range.")]
             public UnityEvent OutsideRangeEvent;
         }
 
-        [Tooltip("Information filters. Please sort from greatest to lowest MaxDistance.")]
         public Filter[] Filters;
 
         [Tooltip("If true, only x and z coordinates will be compared.")]
@@ -58,6 +58,7 @@ namespace GameMechanism
                 if (withinRange != _previouslyWithinRanges[i])
                 {
                     (withinRange?Filters[i].WithinRangeEvent:Filters[i].OutsideRangeEvent).Invoke();
+                    _previouslyWithinRanges[i] = withinRange;
                 }
             }
         }

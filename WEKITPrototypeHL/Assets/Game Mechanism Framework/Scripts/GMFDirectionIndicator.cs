@@ -1,4 +1,4 @@
-﻿// Based on the HoloToolkit.Unity DirectionIndicator class, with adjusted variable ranges and the option to automatically find a cursor if none is assigned.
+﻿// Based on the HoloToolkit.Unity DirectionIndicator class, with adjusted variable ranges and the option to automatically find a cursor if none is assigned. Added SetEnabled method.
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
@@ -170,6 +170,12 @@ namespace GameMechanism
 
             // Find the rotation from the facing direction to the target object.
             rotation = Quaternion.LookRotation(Camera.main.transform.forward, cursorIndicatorDirection) * directionIndicatorDefaultRotation;
+        }
+
+        public void SetEnabled(bool active)
+        {
+            DirectionIndicatorObject.SetActive(active);
+            enabled = active;
         }
     }
 }
