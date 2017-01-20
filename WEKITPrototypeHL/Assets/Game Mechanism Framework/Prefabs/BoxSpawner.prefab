@@ -65,5 +65,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Prefab: {fileID: 1856898716889386, guid: 02eda142a8cb41d4f83f917432f9bfa4, type: 2}
   SpawnInformation: {fileID: 114185428676767778}
-  PlacementType: 0
+  PlacementType: 2
   HalfDims: {x: 0.25, y: 0.25, z: 0.25}
+  TextToSpeech: {fileID: 0}

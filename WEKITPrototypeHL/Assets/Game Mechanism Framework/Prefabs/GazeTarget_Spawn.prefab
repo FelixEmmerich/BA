@@ -40,7 +40,7 @@ Transform:
   m_GameObject: {fileID: 1856898716889386}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -152,6 +152,17 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 65378639161754806}
         m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 114412350001219238}
+        m_MethodName: SetEnabled
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

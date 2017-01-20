@@ -40,6 +40,10 @@ namespace GameMechanism
             GameObject go = HitInfo.collider.gameObject;
             if (go != _lastHit)
             {
+                if (_lastHit != null)
+                {
+                    ExitTargets();
+                }
                 _lastHit = go;
                 Interactable_Pos target = _lastHit.GetComponent<Interactable_Pos>();
                 if (target != null)
@@ -51,7 +55,7 @@ namespace GameMechanism
 
         void ExitTargets()
         {
-            Interactable_Gaze target = _lastHit.GetComponent<Interactable_Gaze>();
+            Interactable_Pos target = _lastHit.GetComponent<Interactable_Pos>();
             if (target != null)
             {
                 target.Exit();

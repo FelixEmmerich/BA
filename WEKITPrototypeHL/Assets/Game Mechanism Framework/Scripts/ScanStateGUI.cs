@@ -16,16 +16,16 @@ public class ScanStateGUI : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        _scanning = true;
         SpatialUnderstanding.Instance.ScanStateChanged += OnStateChange;
-        OnStateChange();
     }
 
     void OnStateChange()
     {
-        if (!_scanning && (int) SpatialUnderstanding.Instance.ScanState > 1)
+        /*if (!_scanning && (int) SpatialUnderstanding.Instance.ScanState > 0)
         {
             _scanning = true;
-        }
+        }*/
         ScanStateText.text = "Scan state: " + SpatialUnderstanding.Instance.ScanState;
     }
 
@@ -42,7 +42,7 @@ public class ScanStateGUI : MonoBehaviour
     {
         if (_statsPtr == IntPtr.Zero)
         {
-            _statsPtr = SpatialUnderstanding.Instance.UnderstandingDLL.GetStaticPlayspaceAlignmentPtr();
+            _statsPtr = SpatialUnderstanding.Instance.UnderstandingDLL.GetStaticPlayspaceStatsPtr();
         }
         if (((++_frameCount % 10) == 0) && (SpatialUnderstandingDll.Imports.QueryPlayspaceStats(_statsPtr) != 0))
         {
