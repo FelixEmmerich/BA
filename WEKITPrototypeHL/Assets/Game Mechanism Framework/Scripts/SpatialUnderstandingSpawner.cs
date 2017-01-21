@@ -12,6 +12,8 @@ namespace GameMechanism
         public SpawnInformation.PlacementTypes PlacementType;
         [Tooltip("Half dimensions of the object to be spawned")] public Vector3 HalfDims;
         public TextToSpeechManager TextToSpeech;
+        [Tooltip("If true, spawns an object as soon as the scan is complete.")]
+        public bool SpawnImmediately = true;
 
         private bool _init;
         private SpatialUnderstandingDll _understandingDll;
@@ -23,38 +25,34 @@ namespace GameMechanism
             SpatialUnderstanding.Instance.ScanStateChanged += Init_Spawner;
         }
 
-        //Should maybe be a coroutine or a System.Threading task if not run in Unity
         public void Spawn()
+        {
+            Spawn(Prefab, PlacementType, HalfDims);
+        }
+
+        public void Spawn(GameObject prefab, SpawnInformation.PlacementTypes placementType, Vector3 halfDims)
         {
             //Sollte nicht gemacht werden, bevor Scan fertig ist.
             if (_init)
             {
                 //DestroyObjects();
                 TextToSpeech.SpeakText("Spawning object");
-                Debug.Log("Spawning object");
-                StartCoroutine(ObjectPlacement());
+                StartCoroutine(ObjectPlacement(prefab, placementType, halfDims));
             }
             else
             {
                 TextToSpeech.SpeakText("Not initialized");
-                Debug.Log("Not initialized yet");
             }
         }
 
-        IEnumerator ObjectPlacement()
+        IEnumerator ObjectPlacement(GameObject prefab, SpawnInformation.PlacementTypes placementType, Vector3 halfDims)
         {
-            SpawnInformation.PlacementQuery query = SpawnInformation.QueryByPlacementType(PlacementType, HalfDims);
-
-            TextToSpeech.SpeakText("Check for null");
-            TextToSpeech.SpeakText("Prefab name" + (Prefab.name==null));
-            TextToSpeech.SpeakText("Rules" + (query.PlacementRules == null));
-            TextToSpeech.SpeakText("Constraints" + (query.PlacementConstraints == null));
-            TextToSpeech.SpeakText("Pointer" + (_understandingDll.GetStaticObjectPlacementResultPtr()==null));
+            SpawnInformation.PlacementQuery query = SpawnInformation.QueryByPlacementType(placementType, halfDims);
 
             //Mit Definition nicht so sicher (Online-Beispiel ist falsch bzw. nicht komplett)
-            if (SpatialUnderstandingDllObjectPlacement.Solver_PlaceObject(Prefab.name,
+            if (SpatialUnderstandingDllObjectPlacement.Solver_PlaceObject(prefab.name,
                     _understandingDll.PinObject(query.PlacementDefinition),
-                    query.PlacementRules!=null?query.PlacementRules.Count:0,
+                    query.PlacementRules != null ? query.PlacementRules.Count : 0,
                     _understandingDll.PinObject(query.PlacementRules.ToArray()),
                     query.PlacementConstraints != null ? query.PlacementConstraints.Count : 0,
                     _understandingDll.PinObject(query.PlacementConstraints.ToArray()),
@@ -63,13 +61,7 @@ namespace GameMechanism
                 SpatialUnderstandingDllObjectPlacement.ObjectPlacementResult placementResult =
                     _understandingDll.GetStaticObjectPlacementResult();
                 Quaternion rot = Quaternion.LookRotation(placementResult.Forward, Vector3.up);
-                Instantiate(Prefab, placementResult.Position, rot);
-                TextToSpeech.SpeakText("Spawned box");
-            }
-            else
-            {
-                TextToSpeech.SpeakText("Could not spawn");
-                Debug.Log("Couldn't spawn object");
+                Instantiate(prefab, placementResult.Position, rot);
             }
             yield return null;
         }
@@ -81,7 +73,10 @@ namespace GameMechanism
             {
                 SpatialUnderstandingDllObjectPlacement.Solver_Init();
                 _init = true;
-                Spawn();
+                if (SpawnImmediately)
+                {
+                    Spawn();
+                }
             }
         }
 
