@@ -8,7 +8,6 @@ namespace GameMechanism
 {
     public class EnvironmentRequirements : MonoBehaviour
     {
-
         //Types coresponding to and comments taken from PlaySpaceStats (from HoloToolkit's SpatialUnderstandingDLL)
         public enum RequirementCategory
         {
@@ -29,50 +28,74 @@ namespace GameMechanism
             NumPlatform // List of Area of each Horizontal not Floor surface (contains count)
         }
 
+        [Serializable]
         public struct Requirement
         {
             public RequirementCategory Category;
             public float Amount;
-            [Tooltip("How required amount is compared to actual amount. If false, a value lower than Amount is required.")]
-            public bool GreaterThanOrEqual;
+
+            [Tooltip(
+                "How required amount is compared to actual amount. If false, a value lower than Amount is required.")] public bool GreaterThanOrEqual;
         }
 
         public Requirement[] Requirements;
         // Use this for initialization
 
-        public bool CheckRequirements()
+        private IntPtr _statsPtr;
+
+        void Start()
         {
-            for (int i=Requirements.Length-1;i>=0;i--)
-            {
-                //Return false if required amount does not behave to actual amount as specified
-                if (Requirements[i].Amount>=GetStatsValueFromCategory(Requirements[i].Category)==Requirements[i].GreaterThanOrEqual)
-                {
-                    return false;
-                }
-            }
-            return true;
+            _statsPtr = SpatialUnderstanding.Instance.UnderstandingDLL.GetStaticPlayspaceStatsPtr();
         }
 
-        public bool CheckAllRequirements(out bool[] status)
+
+        public int CheckRequirements()
         {
-            bool result = true;
-            status = new bool[Requirements.Length];
-            for (int i = Requirements.Length - 1; i >= 0; i--)
+            if ((SpatialUnderstandingDll.Imports.QueryPlayspaceStats(_statsPtr) != 0))
             {
-                //Return false if required amount does not behave to actual amount as specified
-                status[i] = (Requirements[i].Amount >= GetStatsValueFromCategory(Requirements[i].Category) ==
-                             Requirements[i].GreaterThanOrEqual);
-                if (!status[i])
+                for (int i = Requirements.Length - 1; i >= 0; i--)
                 {
-                    result = false;
+                    float amount = GetStatsValueFromCategory(Requirements[i].Category);
+                    //Return false if required amount does not behave to actual amount as specified
+                    if (amount > -1 && (Requirements[i].Amount >= amount ==
+                                        Requirements[i].GreaterThanOrEqual))
+                    {
+                        return 0;
+                    }
                 }
+                return 1;
             }
-            return result;
+            Debug.Log("Stats not yet available");
+            return -1;
+        }
+
+        public int CheckAllRequirements(out bool[] status)
+        {
+            status = new bool[Requirements.Length];
+            if ((SpatialUnderstandingDll.Imports.QueryPlayspaceStats(_statsPtr) != 0))
+            {
+                int result = 1;
+                for (int i = Requirements.Length - 1; i >= 0; i--)
+                {
+                    float amount = GetStatsValueFromCategory(Requirements[i].Category);
+                    //Return false if required amount does not behave to actual amount as specified
+                    status[i] = amount > -1 && (Requirements[i].Amount >= amount ==
+                                                Requirements[i].GreaterThanOrEqual);
+                    if (!status[i])
+                    {
+                        result = 0;
+                    }
+                }
+                return result;
+            }
+            Debug.Log("Stats not yet available");
+            return -1;
         }
 
         private float GetStatsValueFromCategory(RequirementCategory category)
         {
-            SpatialUnderstandingDll.Imports.PlayspaceStats stats = SpatialUnderstanding.Instance.UnderstandingDLL.GetStaticPlayspaceStats();
+            SpatialUnderstandingDll.Imports.PlayspaceStats stats =
+                SpatialUnderstanding.Instance.UnderstandingDLL.GetStaticPlayspaceStats();
             switch (category)
             {
                 case RequirementCategory.HorizSurfaceArea:
@@ -110,6 +133,5 @@ namespace GameMechanism
                     return -1;
             }
         }
-
     }
 }
