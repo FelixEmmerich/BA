@@ -10,7 +10,8 @@ namespace GameMechanism
     public class EnvironmentRequirementGUI : MonoBehaviour
     {
         public EnvironmentRequirements Requirements;
-        public Canvas Canvas;
+        [Tooltip("GameObject is disabled on start and enabled when the scan is done and met the requirements.")]
+        public GameObject StartObject;
         public Text ResultsText;
         [Tooltip("Tags in the Rich format, applied at the result screen for requirements that were met.")]
         public string MetRequirementTags;
@@ -25,6 +26,19 @@ namespace GameMechanism
         void Start()
         {
             SpatialUnderstanding.Instance.ScanStateChanged += DisplayResults;
+            DisplayStartScreen();
+        }
+
+        public void DisplayStartScreen()
+        {
+            StartObject.SetActive(false);
+            string[] requirements = RequirementsToStringArray();
+            string fullstring = "Requirements:\n";
+            for (int i = 0; i < requirements.Length; i++)
+            {
+                fullstring += requirements[i] + "\n";
+            }
+            ResultsText.text = fullstring;
         }
 
         public void DisplayResults()
@@ -35,13 +49,14 @@ namespace GameMechanism
                 int resultInt = Requirements.CheckAllRequirements(out status);
                 if (resultInt >= 0)
                 {
+                    StartObject.SetActive(resultInt==1);
                     string finalText="";
                     string[] requirementTextArray = RequirementsToStringArray();
                     for (int i = 0; i < status.Length; i++)
                     {
-                        finalText += status[i] ? MetRequirementTags : FailedRequirementTags;
+                        finalText += status[i]? MetRequirementTags : FailedRequirementTags;
                         finalText += requirementTextArray[i];
-                        finalText+= status[i] ? MetRequirementEndTags : FailedRequirementEndTags;
+                        finalText += status[i]? MetRequirementEndTags : FailedRequirementEndTags;
                         finalText += "\n";
                     }
                     ResultsText.enabled = true;
@@ -52,12 +67,6 @@ namespace GameMechanism
                     Debug.Log("Scan not done yet");
                 }
             }
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
         }
 
         string[] RequirementsToStringArray()
