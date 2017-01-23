@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using HoloToolkit.Unity;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace GameMechanism
 {
@@ -10,18 +11,47 @@ namespace GameMechanism
     {
         public EnvironmentRequirements Requirements;
         public Canvas Canvas;
-
+        public Text ResultsText;
+        [Tooltip("Tags in the Rich format, applied at the result screen for requirements that were met.")]
+        public string MetRequirementTags;
+        [Tooltip("Closing tags in the Rich format, applied at the result screen for requirements that were met.")]
+        public string MetRequirementEndTags;
+        [Tooltip("Tags in the Rich format, applied at the result screen for requirements that were not met.")]
+        public string FailedRequirementTags;
+        [Tooltip("Closing tags in the Rich format, applied at the result screen for requirements that were met.")]
+        public string FailedRequirementEndTags;
 
         // Use this for initialization
         void Start()
         {
-            SpatialUnderstanding.Instance.ScanStateChanged += CheckRequirements;
+            SpatialUnderstanding.Instance.ScanStateChanged += DisplayResults;
         }
 
-        private void CheckRequirements()
+        public void DisplayResults()
         {
-            bool[] status;
-            Requirements.CheckAllRequirements(out status);
+            if (SpatialUnderstanding.Instance.ScanState==SpatialUnderstanding.ScanStates.Done)
+            {
+                bool[] status;
+                int resultInt = Requirements.CheckAllRequirements(out status);
+                if (resultInt >= 0)
+                {
+                    string finalText="";
+                    string[] requirementTextArray = RequirementsToStringArray();
+                    for (int i = 0; i < status.Length; i++)
+                    {
+                        finalText += status[i] ? MetRequirementTags : FailedRequirementTags;
+                        finalText += requirementTextArray[i];
+                        finalText+= status[i] ? MetRequirementEndTags : FailedRequirementEndTags;
+                        finalText += "\n";
+                    }
+                    ResultsText.enabled = true;
+                    ResultsText.text = finalText;
+                }
+                else
+                {
+                    Debug.Log("Scan not done yet");
+                }
+            }
         }
 
         // Update is called once per frame
