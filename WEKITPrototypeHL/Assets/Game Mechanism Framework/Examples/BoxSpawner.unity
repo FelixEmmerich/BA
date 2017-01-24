@@ -835,7 +835,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -972,7 +972,8 @@ Prefab:
       propertyPath: HalfDims.z
       value: 0.125
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114185428676767778, guid: d0fbc423879adab48acc597a93e91d50, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: d0fbc423879adab48acc597a93e91d50, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1924672586 stripped
@@ -993,3 +994,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: 1834662637}
   voice: 0
+--- !u!114 &1924672588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1924672586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14699521da8539047bb7b1e55ebd4a51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TextToSpeechManager: {fileID: 1924672587}

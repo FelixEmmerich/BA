@@ -8,10 +8,9 @@ namespace GameMechanism
     public class SpatialUnderstandingSpawner : Singleton<SpatialUnderstandingSpawner>
     {
         public GameObject Prefab;
-        public SpawnInformation SpawnInformation;
         public SpawnInformation.PlacementTypes PlacementType;
-        [Tooltip("Half dimensions of the object to be spawned")] public Vector3 HalfDims;
-        public TextToSpeechManager TextToSpeech;
+        [Tooltip("Half dimensions of the object to be spawned")]
+        public Vector3 HalfDims;
         [Tooltip("If true, spawns an object as soon as the scan is complete.")]
         public bool SpawnImmediately = true;
 
@@ -36,12 +35,11 @@ namespace GameMechanism
             if (_init)
             {
                 //DestroyObjects();
-                TextToSpeech.SpeakText("Spawning object");
                 StartCoroutine(ObjectPlacement(prefab, placementType, halfDims));
             }
             else
             {
-                TextToSpeech.SpeakText("Not initialized");
+                Debug.Log("Solver not yet initialized");
             }
         }
 
@@ -49,7 +47,6 @@ namespace GameMechanism
         {
             SpawnInformation.PlacementQuery query = SpawnInformation.QueryByPlacementType(placementType, halfDims);
 
-            //Mit Definition nicht so sicher (Online-Beispiel ist falsch bzw. nicht komplett)
             if (SpatialUnderstandingDllObjectPlacement.Solver_PlaceObject(prefab.name,
                     _understandingDll.PinObject(query.PlacementDefinition),
                     query.PlacementRules != null ? query.PlacementRules.Count : 0,
@@ -68,7 +65,6 @@ namespace GameMechanism
 
         public void Init_Spawner()
         {
-            TextToSpeech.SpeakText("State changed to "+ SpatialUnderstanding.Instance.ScanState);
             if (SpatialUnderstanding.Instance.ScanState == SpatialUnderstanding.ScanStates.Done)
             {
                 SpatialUnderstandingDllObjectPlacement.Solver_Init();

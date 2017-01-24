@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿//Class necessary to call Application.Quit() from a button
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ namespace GameMechanism
             Debug.Log("Quitting");
             Application.Quit();
         }
+
     }
 
 }

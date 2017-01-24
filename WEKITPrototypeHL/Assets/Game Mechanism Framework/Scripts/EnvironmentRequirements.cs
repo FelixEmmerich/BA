@@ -34,12 +34,11 @@ namespace GameMechanism
             public RequirementCategory Category;
             public float Amount;
 
-            [Tooltip(
-                "How required amount is compared to actual amount. If false, a value lower than Amount is required.")] public bool GreaterThanOrEqual;
+            [Tooltip("How required amount is compared to actual amount. If false, a value lower than Amount is required.")]
+            public bool GreaterThanOrEqual;
         }
 
         public Requirement[] Requirements;
-        // Use this for initialization
 
         private IntPtr _statsPtr;
 

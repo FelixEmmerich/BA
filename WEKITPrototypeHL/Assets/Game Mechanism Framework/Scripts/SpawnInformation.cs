@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace GameMechanism
 {
-    public class SpawnInformation : MonoBehaviour
+    public static class SpawnInformation
     {
         public struct PlacementQuery
         {
@@ -40,7 +40,7 @@ namespace GameMechanism
             OnFloorNearMe
         }
 
-        public PlacementQuery QueryByPlacementType(PlacementTypes type, Vector3 halfDims)
+        public static PlacementQuery QueryByPlacementType(PlacementTypes type, Vector3 halfDims)
         {
             switch (type)
             {
@@ -68,7 +68,7 @@ namespace GameMechanism
             }
         }
 
-        public PlacementQuery OnFloor(Vector3 halfDims)
+        public static PlacementQuery OnFloor(Vector3 halfDims)
         {
             return new PlacementQuery(SpatialUnderstandingDllObjectPlacement.ObjectPlacementDefinition.Create_OnFloor(new Vector3(halfDims.x, halfDims.y, halfDims.z/* * 2.0f*/)),
                                     new List<SpatialUnderstandingDllObjectPlacement.ObjectPlacementRule>() {
@@ -76,7 +76,7 @@ namespace GameMechanism
                                     });
         }
 
-        public PlacementQuery OnWall(Vector3 halfDims, float heightMin, float heightMax)
+        public static PlacementQuery OnWall(Vector3 halfDims, float heightMin, float heightMax)
         {
             return
                 new PlacementQuery(
@@ -89,7 +89,7 @@ namespace GameMechanism
                     });
         }
 
-        public PlacementQuery OnCeiling(Vector3 halfDims)
+        public static PlacementQuery OnCeiling(Vector3 halfDims)
         {
             return
                 new PlacementQuery(
@@ -102,7 +102,7 @@ namespace GameMechanism
                     });
         }
 
-        public PlacementQuery OnEdge(Vector3 halfDims)
+        public static PlacementQuery OnEdge(Vector3 halfDims)
         {
             return
                 new PlacementQuery(
@@ -116,7 +116,7 @@ namespace GameMechanism
                     });
         }
 
-        public PlacementQuery OnFloorAndCeiling(Vector3 halfDims)
+        public static PlacementQuery OnFloorAndCeiling(Vector3 halfDims)
         {
             SpatialUnderstandingDll.Imports.QueryPlayspaceAlignment(SpatialUnderstanding.Instance.UnderstandingDLL.GetStaticPlayspaceAlignmentPtr());
             SpatialUnderstandingDll.Imports.PlayspaceAlignment alignment = SpatialUnderstanding.Instance.UnderstandingDLL.GetStaticPlayspaceAlignment();
@@ -133,7 +133,7 @@ namespace GameMechanism
                     });
         }
 
-        public PlacementQuery RandomInAir_AwayFromMe(Vector3 halfDims)
+        public static PlacementQuery RandomInAir_AwayFromMe(Vector3 halfDims)
         {
             return
                 new PlacementQuery(
@@ -148,7 +148,7 @@ namespace GameMechanism
                     });
         }
 
-        public PlacementQuery OnEdge_NearCenter(Vector3 halfDims)
+        public static PlacementQuery OnEdge_NearCenter(Vector3 halfDims)
         {
             return new PlacementQuery(
                 SpatialUnderstandingDllObjectPlacement.ObjectPlacementDefinition.Create_OnEdge(
@@ -165,7 +165,7 @@ namespace GameMechanism
                 });
         }
 
-        public PlacementQuery OnFloor_AwayFromMe(Vector3 halfDims)
+        public static PlacementQuery OnFloor_AwayFromMe(Vector3 halfDims)
         {
             return
                 new PlacementQuery(
@@ -180,7 +180,7 @@ namespace GameMechanism
                     });
         }
 
-        public PlacementQuery OnFloor_NearMe(Vector3 halfDims)
+        public static PlacementQuery OnFloor_NearMe(Vector3 halfDims)
         {
             return
                 new PlacementQuery(
