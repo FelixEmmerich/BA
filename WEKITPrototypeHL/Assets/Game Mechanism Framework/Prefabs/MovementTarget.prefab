@@ -23,8 +23,8 @@ GameObject:
   - component: {fileID: 65550369348848634}
   - component: {fileID: 23557095500504794}
   - component: {fileID: 114875641686236648}
-  - component: {fileID: 114298468956916578}
-  m_Layer: 0
+  - component: {fileID: 114279433266797850}
+  m_Layer: 30
   m_Name: MovementTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114298468956916578
+--- !u!114 &114279433266797850
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -102,7 +102,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1924106274723634}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4546eb3fc65b53b4086e7cce90b46607, type: 3}
+  m_Script: {fileID: 11500000, guid: c8c053563c7c2424b8972b72730fb564, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   DisableCondition: 0

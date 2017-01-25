@@ -23,8 +23,8 @@ GameObject:
   - component: {fileID: 65378639161754806}
   - component: {fileID: 23178066953865976}
   - component: {fileID: 114412350001219238}
-  - component: {fileID: 114867891226291384}
-  m_Layer: 0
+  - component: {fileID: 114490415148499714}
+  m_Layer: 31
   m_Name: GazeTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ MonoBehaviour:
   DirectionIndicatorColor: {r: 0, g: 0, b: 1, a: 1}
   VisibilitySafeFactor: 0.4
   MetersFromCursor: 0.1
---- !u!114 &114867891226291384
+--- !u!114 &114490415148499714
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1856898716889386}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dd684750e021f444b006dedec554a1c, type: 3}
+  m_Script: {fileID: 11500000, guid: c8c053563c7c2424b8972b72730fb564, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   DisableCondition: 0

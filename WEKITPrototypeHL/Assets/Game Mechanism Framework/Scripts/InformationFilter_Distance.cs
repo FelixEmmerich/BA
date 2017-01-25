@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 namespace GameMechanism
 {
-    public class InformationFilter : MonoBehaviour
+    public class InformationFilter_Distance : MonoBehaviour
     {
         [Serializable]
         public struct Filter

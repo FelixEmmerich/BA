@@ -6,12 +6,14 @@ namespace GameMechanism
 {
     public class Cursor : MonoBehaviour
     {
-        public GMFGazeManager GazeManager;
-        
         /// <summary>
         /// The rotation the cursor object will have when not hitting anything. Set at start.
         /// </summary>
         private Quaternion _standardRotation;
+
+        public float MaxDistance = 5;
+
+        public LayerMask Layers;
 
         void Start()
         {
@@ -20,14 +22,19 @@ namespace GameMechanism
 
         void Update()
         {
-            if (GazeManager.Hit)
+            Vector3 CameraPos = Camera.main.transform.position;
+            Vector3 CameraForward = Camera.main.transform.forward;
+            RaycastHit hitInfo;
+
+            if (Physics.Raycast(CameraPos, CameraForward, out hitInfo,
+                MaxDistance, Layers))
             {
-                transform.position = GazeManager.HitInfo.point;
-                transform.rotation = Quaternion.FromToRotation(Vector3.up, GazeManager.HitInfo.normal);
+                transform.position = hitInfo.point;
+                transform.rotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
             }
             else
             {
-                transform.position = GazeManager.CameraPos + GazeManager.CameraForward * GazeManager.MaxDistance;
+                transform.position = CameraPos + CameraForward * MaxDistance;
                 transform.rotation = _standardRotation;
             }
         }
