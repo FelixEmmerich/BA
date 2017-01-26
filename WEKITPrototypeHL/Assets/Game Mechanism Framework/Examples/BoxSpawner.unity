@@ -964,7 +964,7 @@ Prefab:
     - target: {fileID: 114276301950262726, guid: d0fbc423879adab48acc597a93e91d50,
         type: 2}
       propertyPath: PlacementType
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114276301950262726, guid: d0fbc423879adab48acc597a93e91d50,
         type: 2}
