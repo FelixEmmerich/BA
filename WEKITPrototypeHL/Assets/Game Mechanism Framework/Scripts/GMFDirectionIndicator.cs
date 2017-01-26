@@ -46,7 +46,7 @@ namespace GameMechanism
         {
             if (Cursor == null)
             {
-                Debug.LogError("No cursor found - looking for GameObject named Cursor");
+                Debug.Log("No cursor found - looking for GameObject named Cursor");
                 Cursor = GameObject.Find("Cursor");
             }
 
