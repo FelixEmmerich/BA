@@ -313,6 +313,11 @@ Prefab:
       propertyPath: GazeManager
       value: 
       objectReference: {fileID: 1418893089}
+    - target: {fileID: 114423535110678648, guid: 1afbae4e5310b244e9370945072d4cdf,
+        type: 2}
+      propertyPath: Layers.m_Bits
+      value: 1073741823
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1afbae4e5310b244e9370945072d4cdf, type: 2}
   m_IsPrefabParent: 0

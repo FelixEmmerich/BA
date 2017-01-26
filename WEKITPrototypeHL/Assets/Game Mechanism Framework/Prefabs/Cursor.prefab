@@ -91,4 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deeae17073b25f74cba79627203c8d28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GazeManager: {fileID: 0}
+  MaxDistance: 5
+  Layers:
+    serializedVersion: 2
+    m_Bits: 1073741823
