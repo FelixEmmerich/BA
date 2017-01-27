@@ -22,10 +22,13 @@ namespace GameMechanism
         [Tooltip("Closing tags in the Rich format, applied at the result screen for requirements that were met.")]
         public string FailedRequirementEndTags;
 
+        public float UpdateTime=3;
+
         // Use this for initialization
         void Start()
         {
             SpatialUnderstanding.Instance.ScanStateChanged += DisplayResults;
+            SpatialUnderstanding.Instance.ScanStateChanged += BeginUpdatingResults;
             DisplayStartScreen();
         }
 
@@ -43,10 +46,12 @@ namespace GameMechanism
 
         public void DisplayResults()
         {
-            if (SpatialUnderstanding.Instance.ScanState==SpatialUnderstanding.ScanStates.Done)
+            if (/*SpatialUnderstanding.Instance.ScanState==SpatialUnderstanding.ScanStates.Done*/true)
             {
                 bool[] status;
-                int resultInt = Requirements.CheckAllRequirements(out status);
+                float[] amount;
+
+                int resultInt = Requirements.CheckAllRequirements(out status, out amount);
                 if (resultInt >= 0)
                 {
                     StartObject.SetActive(resultInt==1);
@@ -56,6 +61,7 @@ namespace GameMechanism
                     {
                         finalText += status[i]? MetRequirementTags : FailedRequirementTags;
                         finalText += requirementTextArray[i];
+                        finalText += " -> "+amount[i];
                         finalText += status[i]? MetRequirementEndTags : FailedRequirementEndTags;
                         finalText += "\n";
                     }
@@ -66,6 +72,23 @@ namespace GameMechanism
                 {
                     Debug.Log("Scan not done yet");
                 }
+            }
+        }
+
+        void BeginUpdatingResults()
+        {
+            if (SpatialUnderstanding.Instance.ScanState== SpatialUnderstanding.ScanStates.Scanning)
+            {
+                StartCoroutine(UpdateResults()); 
+            }
+        }
+
+        public IEnumerator UpdateResults()
+        {
+            for (;;)
+            {
+                DisplayResults();
+                yield return new WaitForSeconds(UpdateTime);
             }
         }
 

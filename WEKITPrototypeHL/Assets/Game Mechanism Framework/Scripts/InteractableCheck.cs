@@ -48,7 +48,7 @@ namespace GameMechanism
             {
                 LastHit = go;
                 Interactable target = LastHit.GetComponent<Interactable>();
-                if (target != null)
+                if (target != null && target.enabled)
                 {
                     target.Enter();
                 }

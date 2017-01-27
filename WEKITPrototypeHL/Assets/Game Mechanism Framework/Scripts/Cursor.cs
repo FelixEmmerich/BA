@@ -15,6 +15,8 @@ namespace GameMechanism
 
         public LayerMask Layers;
 
+        //bool CastAgainstUI = false;
+
         void Start()
         {
             _standardRotation = transform.rotation;
@@ -26,6 +28,10 @@ namespace GameMechanism
             Vector3 CameraForward = Camera.main.transform.forward;
             RaycastHit hitInfo;
 
+            /*if (CastAgainstUI)
+            {
+                if (Graphic.RayCast())
+            }*/
             if (Physics.Raycast(CameraPos, CameraForward, out hitInfo,
                 MaxDistance, Layers))
             {
@@ -35,7 +41,7 @@ namespace GameMechanism
             else
             {
                 transform.position = CameraPos + CameraForward * MaxDistance;
-                transform.rotation = _standardRotation;
+                transform.rotation= Quaternion.FromToRotation(Vector3.up, -CameraForward);
             }
         }
     }

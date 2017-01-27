@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using HoloToolkit.Unity;
+using UnityEngine.UI;
 
 namespace GameMechanism
 {
@@ -47,7 +48,6 @@ namespace GameMechanism
             _statsPtr = SpatialUnderstanding.Instance.UnderstandingDLL.GetStaticPlayspaceStatsPtr();
         }
 
-
         public int CheckRequirements()
         {
             if ((SpatialUnderstandingDll.Imports.QueryPlayspaceStats(_statsPtr) != 0))
@@ -68,17 +68,21 @@ namespace GameMechanism
             return -1;
         }
 
-        public int CheckAllRequirements(out bool[] status)
+        public int CheckAllRequirements(out bool[] status, out float[] values)
         {
             status = new bool[Requirements.Length];
+            values = new float[Requirements.Length];
             if ((SpatialUnderstandingDll.Imports.QueryPlayspaceStats(_statsPtr) != 0))
             {
                 int result = 1;
                 for (int i = Requirements.Length - 1; i >= 0; i--)
                 {
                     float amount = GetStatsValueFromCategory(Requirements[i].Category);
+
+                    values[i] = amount;
+
                     //Return false if required amount does not behave to actual amount as specified
-                    status[i] = amount > -1 && (Requirements[i].Amount >= amount ==
+                    status[i] = amount > -1 && ((amount>=Requirements[i].Amount) ==
                                                 Requirements[i].GreaterThanOrEqual);
                     if (!status[i])
                     {
@@ -89,6 +93,12 @@ namespace GameMechanism
             }
             Debug.Log("Stats not yet available");
             return -1;
+        }
+
+        public int CheckAllRequirements(out bool[] status)
+        {
+            float[] values;
+            return CheckAllRequirements(out status, out values);
         }
 
         private float GetStatsValueFromCategory(RequirementCategory category)

@@ -37,7 +37,8 @@ namespace GameMechanism
 
         public void BeginFill(Interactable interactable)
         {
-            BeginFill(interactable.StayDuration);
+            //Finish a little earlier to ensure the fill animation is completed
+            BeginFill(interactable.StayDuration-0.1f);
         }
 
         public void AbortFill()
