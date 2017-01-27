@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using HoloToolkit.Unity;
 using UnityEngine;
 
 namespace GameMechanism
@@ -15,8 +16,6 @@ namespace GameMechanism
 
         public LayerMask Layers;
 
-        //bool CastAgainstUI = false;
-
         void Start()
         {
             _standardRotation = transform.rotation;
@@ -24,25 +23,24 @@ namespace GameMechanism
 
         void Update()
         {
+            transform.position = Cast().point;
+            gameObject.transform.forward = Cast().normal;
+            gameObject.transform.rotation *= _standardRotation;
+        }
+
+        public virtual RaycastHit Cast()
+        {
             Vector3 CameraPos = Camera.main.transform.position;
             Vector3 CameraForward = Camera.main.transform.forward;
             RaycastHit hitInfo;
 
-            /*if (CastAgainstUI)
-            {
-                if (Graphic.RayCast())
-            }*/
-            if (Physics.Raycast(CameraPos, CameraForward, out hitInfo,
+            if (!Physics.Raycast(CameraPos, CameraForward, out hitInfo,
                 MaxDistance, Layers))
             {
-                transform.position = hitInfo.point;
-                transform.rotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
+                hitInfo.point = CameraPos + CameraForward * MaxDistance;
+                hitInfo.normal = -CameraForward;
             }
-            else
-            {
-                transform.position = CameraPos + CameraForward * MaxDistance;
-                transform.rotation= Quaternion.FromToRotation(Vector3.up, -CameraForward);
-            }
+            return hitInfo;
         }
     }
 }
