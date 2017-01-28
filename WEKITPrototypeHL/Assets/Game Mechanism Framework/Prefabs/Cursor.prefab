@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33541096317357688}
   - component: {fileID: 23544498642117304}
   - component: {fileID: 114423535110678648}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cursor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,6 +92,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxDistance: 5
+  HitDistance: 0.01
   Layers:
     serializedVersion: 2
-    m_Bits: 1073741823
+    m_Bits: 1073741819

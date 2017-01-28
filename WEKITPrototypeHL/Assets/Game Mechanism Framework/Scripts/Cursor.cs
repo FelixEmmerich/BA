@@ -14,6 +14,9 @@ namespace GameMechanism
 
         public float MaxDistance = 5;
 
+        [Tooltip("How far from the actual hitpoint the cursor is supposed to be placed (makes the cursor more visible)")]
+        public float HitDistance = 0.01f;
+
         public LayerMask Layers;
 
         void Start()
@@ -23,8 +26,9 @@ namespace GameMechanism
 
         void Update()
         {
-            transform.position = Cast().point;
-            gameObject.transform.forward = Cast().normal;
+            RaycastHit hit = Cast();
+            transform.position = hit.point+(hit.normal*HitDistance);
+            gameObject.transform.forward = hit.normal;
             gameObject.transform.rotation *= _standardRotation;
         }
 
