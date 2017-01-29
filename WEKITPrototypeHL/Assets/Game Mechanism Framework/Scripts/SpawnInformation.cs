@@ -1,7 +1,6 @@
-﻿//Information taken from HoloToolkit examples (LevelSolver) and modified to be more generic - in the examples, the half dimensions are a float randomly generated within a range. Not yet tested.
+﻿//Information taken from HoloToolkit examples (LevelSolver) and modified to be more generic - in the examples, the half dimensions are a float randomly generated within a range. Not yet tested thoroughly.
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using HoloToolkit.Unity;
 using UnityEngine;

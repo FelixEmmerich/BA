@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using HoloToolkit.Unity;
-using UnityEngine;
+﻿using UnityEngine;
 
 //
 namespace GameMechanism

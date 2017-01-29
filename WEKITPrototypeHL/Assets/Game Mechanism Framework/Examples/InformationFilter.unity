@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 977663702}
   - component: {fileID: 977663701}
   m_Layer: 0
-  m_Name: Audio Source
+  m_Name: TextToSpeech
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -188,7 +188,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -483,7 +483,7 @@ GameObject:
   - component: {fileID: 1724074237}
   - component: {fileID: 1724074238}
   m_Layer: 31
-  m_Name: Cube
+  m_Name: Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

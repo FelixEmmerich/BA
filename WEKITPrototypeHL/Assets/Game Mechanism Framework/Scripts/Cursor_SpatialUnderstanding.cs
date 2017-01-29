@@ -1,7 +1,5 @@
 ﻿//Based on SpatialUnderstandingCursor from HoloToolkit examples
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using HoloToolkit.Unity;
 using UnityEngine;
 

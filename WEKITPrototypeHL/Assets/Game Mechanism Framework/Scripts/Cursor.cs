@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using HoloToolkit.Unity;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace GameMechanism
 {
@@ -34,15 +31,15 @@ namespace GameMechanism
 
         public virtual RaycastHit Cast()
         {
-            Vector3 CameraPos = Camera.main.transform.position;
-            Vector3 CameraForward = Camera.main.transform.forward;
+            Vector3 cameraPos = Camera.main.transform.position;
+            Vector3 cameraForward = Camera.main.transform.forward;
             RaycastHit hitInfo;
 
-            if (!Physics.Raycast(CameraPos, CameraForward, out hitInfo,
+            if (!Physics.Raycast(cameraPos, cameraForward, out hitInfo,
                 MaxDistance, Layers))
             {
-                hitInfo.point = CameraPos + CameraForward * MaxDistance;
-                hitInfo.normal = -CameraForward;
+                hitInfo.point = cameraPos + cameraForward * MaxDistance;
+                hitInfo.normal = -cameraForward;
             }
             return hitInfo;
         }

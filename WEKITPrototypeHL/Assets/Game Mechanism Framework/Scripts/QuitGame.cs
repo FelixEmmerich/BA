@@ -1,6 +1,4 @@
-﻿//Class necessary to call Application.Quit() from a button
-using System.Collections;
-using System.Collections.Generic;
+﻿//Class necessary to call Application.Quit() from a UnityEvent
 using UnityEngine;
 
 namespace GameMechanism
