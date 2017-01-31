@@ -6,7 +6,6 @@ namespace GameMechanism
 {
     public class Interactable : MonoBehaviour
     {
-
         public enum DisableConditions
         {
             None,
@@ -16,12 +15,15 @@ namespace GameMechanism
         }
 
 
-        public DisableConditions DisableCondition; //Dedicated variable instead of a part of EnterEvents to ensure safe order of operations
+        public DisableConditions DisableCondition;
+            //Dedicated variable instead of a part of EnterEvents to ensure safe order of operations
+
         public UnityEvent EnterEvents;
         public UnityEvent ExitEvents;
         public UnityEvent StayEvents;
-        [Tooltip("Time in seconds the object needs to remain in Enter state before Stay() is called.")]
-        public float StayDuration=2;
+
+        [Tooltip("Time in seconds the object needs to remain in Enter state before Stay() is called.")] public float
+            StayDuration = 2;
 
         private Coroutine _stayCR;
 
@@ -36,7 +38,7 @@ namespace GameMechanism
             {
                 Debug.Log("Enter");
             }
-            gameObject.SetActive(DisableCondition!=DisableConditions.Enter);
+            gameObject.SetActive(DisableCondition != DisableConditions.Enter);
         }
 
         public void Exit()
@@ -75,7 +77,6 @@ namespace GameMechanism
         //Necessary for enabled/disabled checkbox to show on component
         void Start()
         {
-            
         }
     }
 }

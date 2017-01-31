@@ -4,7 +4,6 @@ namespace GameMechanism
 {
     public class InteractableCheck_Gaze : InteractableCheck
     {
-
         public override Vector3 RayStart
         {
             get { return Camera.main.transform.position; }

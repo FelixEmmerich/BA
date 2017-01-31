@@ -8,10 +8,8 @@ namespace GameMechanism
     {
         public GameObject Prefab;
         public SpawnInformation.PlacementTypes PlacementType;
-        [Tooltip("Half dimensions of the object to be spawned")]
-        public Vector3 HalfDims;
-        [Tooltip("If true, spawns an object as soon as the scan is complete.")]
-        public bool SpawnImmediately = true;
+        [Tooltip("Half dimensions of the object to be spawned")] public Vector3 HalfDims;
+        [Tooltip("If true, spawns an object as soon as the scan is complete.")] public bool SpawnImmediately = true;
 
         private bool _init;
         private SpatialUnderstandingDll _understandingDll;

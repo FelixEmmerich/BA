@@ -8,19 +8,23 @@ namespace GameMechanism
     public class EnvironmentRequirementGUI : MonoBehaviour
     {
         public EnvironmentRequirements Requirements;
-        [Tooltip("GameObject is disabled on start and enabled when the scan is done and met the requirements.")]
-        public GameObject StartObject;
-        public Text ResultsText;
-        [Tooltip("Tags in the Rich format, applied at the result screen for requirements that were met.")]
-        public string MetRequirementTags;
-        [Tooltip("Closing tags in the Rich format, applied at the result screen for requirements that were met.")]
-        public string MetRequirementEndTags;
-        [Tooltip("Tags in the Rich format, applied at the result screen for requirements that were not met.")]
-        public string FailedRequirementTags;
-        [Tooltip("Closing tags in the Rich format, applied at the result screen for requirements that were met.")]
-        public string FailedRequirementEndTags;
 
-        public float UpdateTime=3;
+        [Tooltip("GameObject is disabled on start and enabled when the scan is done and met the requirements.")] public
+            GameObject StartObject;
+
+        public Text ResultsText;
+
+        [Tooltip("Tags in the Rich format, applied at the result screen for requirements that were met.")] public string
+            MetRequirementTags;
+
+        [Tooltip("Closing tags in the Rich format, applied at the result screen for requirements that were met.")] public string MetRequirementEndTags;
+
+        [Tooltip("Tags in the Rich format, applied at the result screen for requirements that were not met.")] public
+            string FailedRequirementTags;
+
+        [Tooltip("Closing tags in the Rich format, applied at the result screen for requirements that were met.")] public string FailedRequirementEndTags;
+
+        public float UpdateTime = 3;
 
         // Use this for initialization
         void Start()
@@ -44,7 +48,7 @@ namespace GameMechanism
 
         public void DisplayResults()
         {
-            if (/*SpatialUnderstanding.Instance.ScanState==SpatialUnderstanding.ScanStates.Done*/true)
+            if ( /*SpatialUnderstanding.Instance.ScanState==SpatialUnderstanding.ScanStates.Done*/true)
             {
                 bool[] status;
                 float[] amount;
@@ -52,15 +56,15 @@ namespace GameMechanism
                 int resultInt = Requirements.CheckAllRequirements(out status, out amount);
                 if (resultInt >= 0)
                 {
-                    StartObject.SetActive(resultInt==1);
-                    string finalText="";
+                    StartObject.SetActive(resultInt == 1);
+                    string finalText = "";
                     string[] requirementTextArray = RequirementsToStringArray();
                     for (int i = 0; i < status.Length; i++)
                     {
-                        finalText += status[i]? MetRequirementTags : FailedRequirementTags;
+                        finalText += status[i] ? MetRequirementTags : FailedRequirementTags;
                         finalText += requirementTextArray[i];
-                        finalText += " -> "+amount[i];
-                        finalText += status[i]? MetRequirementEndTags : FailedRequirementEndTags;
+                        finalText += " -> " + amount[i];
+                        finalText += status[i] ? MetRequirementEndTags : FailedRequirementEndTags;
                         finalText += "\n";
                     }
                     ResultsText.enabled = true;
@@ -75,9 +79,9 @@ namespace GameMechanism
 
         void BeginUpdatingResults()
         {
-            if (SpatialUnderstanding.Instance.ScanState== SpatialUnderstanding.ScanStates.Scanning)
+            if (SpatialUnderstanding.Instance.ScanState == SpatialUnderstanding.ScanStates.Scanning)
             {
-                StartCoroutine(UpdateResults()); 
+                StartCoroutine(UpdateResults());
             }
         }
 
@@ -145,5 +149,4 @@ namespace GameMechanism
             }
         }
     }
-
 }

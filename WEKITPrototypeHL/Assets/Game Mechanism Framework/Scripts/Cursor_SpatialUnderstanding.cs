@@ -1,4 +1,5 @@
 ﻿//Based on SpatialUnderstandingCursor from HoloToolkit examples
+
 using System;
 using HoloToolkit.Unity;
 using UnityEngine;
@@ -28,5 +29,4 @@ namespace GameMechanism
             return base.Cast();
         }
     }
-
 }

@@ -15,7 +15,7 @@ namespace GameMechanism
 
         void StateChange()
         {
-            TextToSpeechManager.SpeakText("State changed to "+ SpatialUnderstanding.Instance.ScanState);
+            TextToSpeechManager.SpeakText("State changed to " + SpatialUnderstanding.Instance.ScanState);
         }
-    } 
+    }
 }

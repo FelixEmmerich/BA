@@ -1,4 +1,5 @@
 ﻿//Class necessary to call Application.Quit() from a UnityEvent
+
 using UnityEngine;
 
 namespace GameMechanism
@@ -10,7 +11,5 @@ namespace GameMechanism
             Debug.Log("Quitting");
             Application.Quit();
         }
-
     }
-
 }

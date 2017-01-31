@@ -9,7 +9,8 @@ namespace GameMechanism
         //Types coresponding to and comments taken from PlaySpaceStats (from HoloToolkit's SpatialUnderstandingDLL)
         public enum RequirementCategory
         {
-            HorizSurfaceArea, // In m2 : All horizontal faces UP between Ground – 0.15 and Ground + 1.f (include Ground and convenient horiz surface)
+            HorizSurfaceArea,
+            // In m2 : All horizontal faces UP between Ground – 0.15 and Ground + 1.f (include Ground and convenient horiz surface)
             TotalSurfaceArea, // In m2 : All !
             UpSurfaceArea, // In m2 : All horizontal faces UP (no constraint => including ground)
             DownSurfaceArea, // In m2 : All horizontal faces DOWN (no constraint => including ceiling)
@@ -32,8 +33,8 @@ namespace GameMechanism
             public RequirementCategory Category;
             public float Amount;
 
-            [Tooltip("How required amount is compared to actual amount. If false, a value lower than Amount is required.")]
-            public bool GreaterThanOrEqual;
+            [Tooltip(
+                "How required amount is compared to actual amount. If false, a value lower than Amount is required.")] public bool GreaterThanOrEqual;
         }
 
         public Requirement[] Requirements;
@@ -79,7 +80,7 @@ namespace GameMechanism
                     values[i] = amount;
 
                     //Return false if required amount does not behave to actual amount as specified
-                    status[i] = amount > -1 && ((amount>=Requirements[i].Amount) ==
+                    status[i] = amount > -1 && ((amount >= Requirements[i].Amount) ==
                                                 Requirements[i].GreaterThanOrEqual);
                     if (!status[i])
                     {

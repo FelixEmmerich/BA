@@ -18,7 +18,9 @@ namespace GameMechanism
             {
                 PlacementDefinition = placementDefinition;
                 PlacementRules = placementRules;
-                PlacementConstraints = placementConstraints==null? new List<SpatialUnderstandingDllObjectPlacement.ObjectPlacementConstraint>():placementConstraints;
+                PlacementConstraints = placementConstraints == null
+                    ? new List<SpatialUnderstandingDllObjectPlacement.ObjectPlacementConstraint>()
+                    : placementConstraints;
             }
 
             public SpatialUnderstandingDllObjectPlacement.ObjectPlacementDefinition PlacementDefinition;
@@ -69,10 +71,15 @@ namespace GameMechanism
 
         public static PlacementQuery OnFloor(Vector3 halfDims)
         {
-            return new PlacementQuery(SpatialUnderstandingDllObjectPlacement.ObjectPlacementDefinition.Create_OnFloor(new Vector3(halfDims.x, halfDims.y, halfDims.z/* * 2.0f*/)),
-                                    new List<SpatialUnderstandingDllObjectPlacement.ObjectPlacementRule>() {
-                                            SpatialUnderstandingDllObjectPlacement.ObjectPlacementRule.Create_AwayFromOtherObjects(Math.Max(halfDims.x,halfDims.z) * 3.0f),
-                                    });
+            return
+                new PlacementQuery(
+                    SpatialUnderstandingDllObjectPlacement.ObjectPlacementDefinition.Create_OnFloor(
+                        new Vector3(halfDims.x, halfDims.y, halfDims.z /* * 2.0f*/)),
+                    new List<SpatialUnderstandingDllObjectPlacement.ObjectPlacementRule>()
+                    {
+                        SpatialUnderstandingDllObjectPlacement.ObjectPlacementRule.Create_AwayFromOtherObjects(
+                            Math.Max(halfDims.x, halfDims.z) * 3.0f),
+                    });
         }
 
         public static PlacementQuery OnWall(Vector3 halfDims, float heightMin, float heightMax)
@@ -84,7 +91,7 @@ namespace GameMechanism
                     new List<SpatialUnderstandingDllObjectPlacement.ObjectPlacementRule>()
                     {
                         SpatialUnderstandingDllObjectPlacement.ObjectPlacementRule.Create_AwayFromOtherObjects(
-                            Math.Max(halfDims.x,halfDims.z)*4.0f),
+                            Math.Max(halfDims.x, halfDims.z) * 4.0f),
                     });
         }
 
@@ -97,7 +104,7 @@ namespace GameMechanism
                     new List<SpatialUnderstandingDllObjectPlacement.ObjectPlacementRule>()
                     {
                         SpatialUnderstandingDllObjectPlacement.ObjectPlacementRule.Create_AwayFromOtherObjects(
-                            Math.Max(halfDims.x,halfDims.z) * 3.0f),
+                            Math.Max(halfDims.x, halfDims.z) * 3.0f),
                     });
         }
 
@@ -117,8 +124,10 @@ namespace GameMechanism
 
         public static PlacementQuery OnFloorAndCeiling(Vector3 halfDims)
         {
-            SpatialUnderstandingDll.Imports.QueryPlayspaceAlignment(SpatialUnderstanding.Instance.UnderstandingDLL.GetStaticPlayspaceAlignmentPtr());
-            SpatialUnderstandingDll.Imports.PlayspaceAlignment alignment = SpatialUnderstanding.Instance.UnderstandingDLL.GetStaticPlayspaceAlignment();
+            SpatialUnderstandingDll.Imports.QueryPlayspaceAlignment(
+                SpatialUnderstanding.Instance.UnderstandingDLL.GetStaticPlayspaceAlignmentPtr());
+            SpatialUnderstandingDll.Imports.PlayspaceAlignment alignment =
+                SpatialUnderstanding.Instance.UnderstandingDLL.GetStaticPlayspaceAlignment();
 
             return
                 new PlacementQuery(
@@ -155,8 +164,9 @@ namespace GameMechanism
                     halfDims),
                 new List<SpatialUnderstandingDllObjectPlacement.ObjectPlacementRule>()
                 {
-                    SpatialUnderstandingDllObjectPlacement.ObjectPlacementRule.Create_AwayFromOtherObjects(Math.Max(halfDims.x, halfDims.z) *
-                                                                                                           2.0f),
+                    SpatialUnderstandingDllObjectPlacement.ObjectPlacementRule.Create_AwayFromOtherObjects(
+                        Math.Max(halfDims.x, halfDims.z) *
+                        2.0f),
                 },
                 new List<SpatialUnderstandingDllObjectPlacement.ObjectPlacementConstraint>()
                 {

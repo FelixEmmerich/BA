@@ -9,23 +9,18 @@ namespace GameMechanism
     {
         public Text ScanStateText;
         public Text StatsText;
-        private bool _scanning;
+        private bool _scanning = true;
         private int _frameCount;
         private IntPtr _statsPtr;
 
         // Use this for initialization
         void Start()
         {
-            _scanning = true;
             SpatialUnderstanding.Instance.ScanStateChanged += OnStateChange;
         }
 
         void OnStateChange()
         {
-            /*if (!_scanning && (int) SpatialUnderstanding.Instance.ScanState > 0)
-            {
-                _scanning = true;
-            }*/
             ScanStateText.text = "Scan state: " + SpatialUnderstanding.Instance.ScanState;
         }
 
@@ -53,5 +48,4 @@ namespace GameMechanism
             }
         }
     }
-
 }
