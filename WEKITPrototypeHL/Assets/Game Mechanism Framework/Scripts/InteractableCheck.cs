@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace GameMechanism
 {
@@ -14,11 +15,15 @@ namespace GameMechanism
 
         [HideInInspector] public GameObject LastHit;
 
+        [HideInInspector] public Interactable LastInteractable;
+
         [Tooltip(
             "Layers checked during Raycast. If different InteractableCheck-derived scripts are active, it is best to move the targets for each to a separate layer."
         )] public LayerMask CheckLayers;
 
         public float MaxDistance;
+
+        private Coroutine _stayCoroutine;
 
         // Update is called once per frame
         void Update()
@@ -27,35 +32,56 @@ namespace GameMechanism
                 MaxDistance, CheckLayers);
             if (Hit)
             {
+                GetHitData();
                 EnterTargets();
+                _stayCoroutine=StartCoroutine(Stay());
             }
             else if (LastHit != null)
             {
+                StopCoroutine(_stayCoroutine);
                 ExitTargets();
                 LastHit = null;
+                LastInteractable = null;
             }
         }
 
         void EnterTargets()
         {
+            if (LastInteractable != null && LastInteractable.enabled)
+            {
+                LastInteractable.Enter();
+            }
+        }
+
+        void GetHitData()
+        {
             GameObject go = HitInfo.collider.gameObject;
             if (go != LastHit)
             {
                 LastHit = go;
-                Interactable target = LastHit.GetComponent<Interactable>();
-                if (target != null && target.enabled)
-                {
-                    target.Enter();
-                }
+                LastInteractable = LastHit.GetComponent<Interactable>();
             }
+        }
+
+        public IEnumerator Stay()
+        {
+            if (LastInteractable == null)
+            {
+                yield break;
+            }
+            yield return new WaitForSeconds(LastInteractable.StayDuration);
+            if (LastInteractable == null)
+            {
+                yield break;
+            }
+            LastInteractable.Stay();
         }
 
         void ExitTargets()
         {
-            Interactable target = LastHit.GetComponent<Interactable>();
-            if (target != null)
+            if (LastInteractable != null)
             {
-                target.Exit();
+                LastInteractable.Exit();
             }
         }
     }

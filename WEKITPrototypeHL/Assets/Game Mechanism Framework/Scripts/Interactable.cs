@@ -25,53 +25,32 @@ namespace GameMechanism
         [Tooltip("Time in seconds the object needs to remain in Enter state before Stay() is called.")] public float
             StayDuration = 2;
 
-        private Coroutine _stayCR;
-
         public void Enter()
         {
-            _stayCR = StartCoroutine(StayCR());
-            if (EnterEvents != null)
-            {
-                EnterEvents.Invoke();
-            }
-            else
-            {
-                Debug.Log("Enter");
-            }
-            gameObject.SetActive(DisableCondition != DisableConditions.Enter);
+            CallEvent(EnterEvents,DisableConditions.Enter,"Enter");
         }
 
         public void Exit()
         {
-            StopCoroutine(_stayCR);
-            if (ExitEvents != null)
-            {
-                ExitEvents.Invoke();
-            }
-            else
-            {
-                Debug.Log("Exit");
-            }
-            gameObject.SetActive(DisableCondition != DisableConditions.Exit);
-        }
-
-        public IEnumerator StayCR()
-        {
-            yield return new WaitForSeconds(StayDuration);
-            Stay();
+            CallEvent(ExitEvents,DisableConditions.Exit,"Exit");
         }
 
         public void Stay()
         {
-            if (StayEvents != null)
+            CallEvent(StayEvents,DisableConditions.Stay,"Stay");
+        }
+
+        private void CallEvent(UnityEvent unityEvent, DisableConditions condition, string debugmessage="Interactable event")
+        {
+            if (unityEvent != null)
             {
-                StayEvents.Invoke();
+                unityEvent.Invoke();
             }
             else
             {
-                Debug.Log("Stay");
+                Debug.Log(debugmessage);
             }
-            gameObject.SetActive(DisableCondition != DisableConditions.Stay);
+            gameObject.SetActive(DisableCondition != condition);
         }
 
         //Necessary for enabled/disabled checkbox to show on component
