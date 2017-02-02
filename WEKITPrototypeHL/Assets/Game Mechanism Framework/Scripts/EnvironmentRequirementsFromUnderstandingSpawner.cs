@@ -18,6 +18,7 @@ namespace GameMechanism
 
         }
 
+        /*
         public static EnvironmentRequirements.Requirement[] GenerateRequirements(SpawnInformation.PlacementTypes placementType, Vector3 halfDims)
         {
             switch (placementType)
@@ -44,6 +45,7 @@ namespace GameMechanism
                     return new EnvironmentRequirements.Requirement[0];
             }
         }
+        */
 
         public static EnvironmentRequirements.Requirement[] OnFloor(Vector3 halfDims)
         {

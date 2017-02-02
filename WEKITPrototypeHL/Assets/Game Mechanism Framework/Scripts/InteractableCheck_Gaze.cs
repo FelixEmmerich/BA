@@ -2,7 +2,7 @@
 
 namespace GameMechanism
 {
-    public class InteractableCheck_Gaze : InteractableCheck
+    public class InteractableCheck_Gaze : InteractableCheck_RayCast
     {
         public override Vector3 RayStart
         {

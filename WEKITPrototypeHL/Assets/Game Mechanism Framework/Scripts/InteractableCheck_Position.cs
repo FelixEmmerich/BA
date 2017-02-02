@@ -2,7 +2,7 @@
 
 namespace GameMechanism
 {
-    public class InteractableCheck_Position : InteractableCheck
+    public class InteractableCheck_Position : InteractableCheck_RayCast
     {
         public override Vector3 RayStart
         {

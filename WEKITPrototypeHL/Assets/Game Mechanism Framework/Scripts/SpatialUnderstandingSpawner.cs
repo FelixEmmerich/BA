@@ -67,28 +67,6 @@ namespace GameMechanism
             yield return null;
         }
 
-        IEnumerator ObjectPlacement(GameObject prefab, SpawnInformation.PlacementTypes placementType, Vector3 halfDims)
-        {
-            //Generate an environment query by the placement type and half dimensions
-            SpawnInformation.PlacementQuery query = SpawnInformation.QueryByPlacementType(placementType, halfDims);
-
-            //Find a location for the prefab according to the query (definition, rules, and constraints), then place it there
-            if (SpatialUnderstandingDllObjectPlacement.Solver_PlaceObject(prefab.name,
-                    _understandingDll.PinObject(query.PlacementDefinition),
-                    query.PlacementRules != null ? query.PlacementRules.Count : 0,
-                    _understandingDll.PinObject(query.PlacementRules.ToArray()),
-                    query.PlacementConstraints != null ? query.PlacementConstraints.Count : 0,
-                    _understandingDll.PinObject(query.PlacementConstraints.ToArray()),
-                    _understandingDll.GetStaticObjectPlacementResultPtr()) > 0)
-            {
-                SpatialUnderstandingDllObjectPlacement.ObjectPlacementResult placementResult =
-                    _understandingDll.GetStaticObjectPlacementResult();
-                Quaternion rot = Quaternion.LookRotation(placementResult.Forward, Vector3.up);
-                Instantiate(prefab, placementResult.Position, rot);
-            }
-            yield return null;
-        }
-
         public void Init_Spawner()
         {
             if (SpatialUnderstanding.Instance.ScanState == SpatialUnderstanding.ScanStates.Done)

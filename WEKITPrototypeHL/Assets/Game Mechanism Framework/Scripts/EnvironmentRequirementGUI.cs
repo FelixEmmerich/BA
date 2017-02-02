@@ -26,6 +26,8 @@ namespace GameMechanism
 
         public float UpdateTime = 3;
 
+        private string[] _requirementStrings;
+
         // Use this for initialization
         void Start()
         {
@@ -37,11 +39,11 @@ namespace GameMechanism
         public void DisplayStartScreen()
         {
             StartObject.SetActive(false);
-            string[] requirements = RequirementsToStringArray();
+            _requirementStrings = RequirementsToStringArray(Requirements.Requirements);
             string fullstring = "Requirements:\n";
-            for (int i = 0; i < requirements.Length; i++)
+            for (int i = 0; i < _requirementStrings.Length; i++)
             {
-                fullstring += requirements[i] + "\n";
+                fullstring += _requirementStrings[i] + "\n";
             }
             ResultsText.text = fullstring;
         }
@@ -56,11 +58,10 @@ namespace GameMechanism
             {
                 StartObject.SetActive(resultInt == 1);
                 string finalText = "";
-                string[] requirementTextArray = RequirementsToStringArray();
                 for (int i = 0; i < status.Length; i++)
                 {
                     finalText += status[i] ? MetRequirementTags : FailedRequirementTags;
-                    finalText += requirementTextArray[i];
+                    finalText += _requirementStrings[i];
                     finalText += " -> " + amount[i];
                     finalText += status[i] ? MetRequirementEndTags : FailedRequirementEndTags;
                     finalText += "\n";
@@ -91,12 +92,12 @@ namespace GameMechanism
             }
         }
 
-        string[] RequirementsToStringArray()
+        string[] RequirementsToStringArray(EnvironmentRequirements.Requirement[] requirements)
         {
-            string[] result = new string[Requirements.Requirements.Length];
+            string[] result = new string[requirements.Length];
             for (int i = result.Length - 1; i >= 0; i--)
             {
-                result[i] = RequirementToString(Requirements.Requirements[i]);
+                result[i] = RequirementToString(requirements[i]);
             }
             return result;
         }

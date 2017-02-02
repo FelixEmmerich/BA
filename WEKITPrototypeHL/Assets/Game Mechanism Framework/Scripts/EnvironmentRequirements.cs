@@ -36,7 +36,8 @@ namespace GameMechanism
             public float Amount;
 
             [Tooltip(
-                "How required amount is compared to actual amount. If false, a value lower than Amount is required.")] public bool GreaterThanOrEqual;
+                "How required amount is compared to actual amount. If false, a value lower than Amount is required.")]
+            public bool GreaterThanOrEqual;
         }
 
         public Requirement[] Requirements;
@@ -56,8 +57,7 @@ namespace GameMechanism
                 {
                     float amount = GetStatsValueFromCategory(Requirements[i].Category);
                     //Return false if required amount does not behave to actual amount as specified
-                    if (amount > -1 && (Requirements[i].Amount >= amount ==
-                                        Requirements[i].GreaterThanOrEqual))
+                    if (CheckRequirement(amount, Requirements[i]))
                     {
                         return 0;
                     }
@@ -82,8 +82,7 @@ namespace GameMechanism
                     values[i] = amount;
 
                     //Return false if required amount does not behave to actual amount as specified
-                    status[i] = amount > -1 && ((amount >= Requirements[i].Amount) ==
-                                                Requirements[i].GreaterThanOrEqual);
+                    status[i] = CheckRequirement(amount, Requirements[i]);
                     if (!status[i])
                     {
                         result = 0;
@@ -93,6 +92,11 @@ namespace GameMechanism
             }
             Debug.Log("Stats not yet available");
             return -1;
+        }
+
+        public bool CheckRequirement(float amount, Requirement requirement)
+        {
+            return amount >= 0 && ((amount >= requirement.Amount) == requirement.GreaterThanOrEqual);
         }
 
         public int CheckAllRequirements(out bool[] status)

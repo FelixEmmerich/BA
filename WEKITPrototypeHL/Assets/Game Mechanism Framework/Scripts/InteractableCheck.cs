@@ -5,62 +5,48 @@ namespace GameMechanism
 {
     public abstract class InteractableCheck : MonoBehaviour
     {
-        public abstract Vector3 RayStart { get; }
-
-        public abstract Vector3 RayDirection { get; }
-
-        [HideInInspector] public RaycastHit HitInfo;
-
-        [HideInInspector] public bool Hit;
 
         [HideInInspector] public GameObject LastHit;
 
         [HideInInspector] public Interactable LastInteractable;
-
-        [Tooltip(
-            "Layers checked during Raycast. If different InteractableCheck-derived scripts are active, it is best to move the targets for each to a separate layer."
-        )] public LayerMask CheckLayers;
-
-        public float MaxDistance;
 
         private Coroutine _stayCoroutine;
 
         // Update is called once per frame
         void Update()
         {
-            Hit = Physics.Raycast(RayStart, RayDirection, out HitInfo,
-                MaxDistance, CheckLayers);
-            if (Hit)
+            GameObject currentObject = DetectObject();
+            if (currentObject!=null)
             {
-                GetHitData();
-                EnterTargets();
-                _stayCoroutine=StartCoroutine(Stay());
+                if (ObjectIsNewInteractable(currentObject))
+                {
+                    LastInteractable.Enter();
+                    _stayCoroutine = StartCoroutine(Stay());
+                }
             }
             else if (LastHit != null)
             {
                 StopCoroutine(_stayCoroutine);
-                ExitTargets();
+                if (LastInteractable != null)
+                {
+                    LastInteractable.Exit();
+                }
                 LastHit = null;
                 LastInteractable = null;
             }
         }
 
-        void EnterTargets()
-        {
-            if (LastInteractable != null && LastInteractable.enabled)
-            {
-                LastInteractable.Enter();
-            }
-        }
+        public abstract GameObject DetectObject();
 
-        void GetHitData()
+        bool ObjectIsNewInteractable(GameObject go)
         {
-            GameObject go = HitInfo.collider.gameObject;
             if (go != LastHit)
             {
                 LastHit = go;
                 LastInteractable = LastHit.GetComponent<Interactable>();
+                return (LastInteractable != null && LastInteractable.enabled);
             }
+            return false;
         }
 
         public IEnumerator Stay()
@@ -77,12 +63,5 @@ namespace GameMechanism
             LastInteractable.Stay();
         }
 
-        void ExitTargets()
-        {
-            if (LastInteractable != null)
-            {
-                LastInteractable.Exit();
-            }
-        }
     }
 }

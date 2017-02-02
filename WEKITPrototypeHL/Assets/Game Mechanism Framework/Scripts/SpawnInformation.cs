@@ -17,10 +17,8 @@ namespace GameMechanism
                 List<SpatialUnderstandingDllObjectPlacement.ObjectPlacementConstraint> placementConstraints = null)
             {
                 PlacementDefinition = placementDefinition;
-                PlacementRules = placementRules;
-                PlacementConstraints = placementConstraints == null
-                    ? new List<SpatialUnderstandingDllObjectPlacement.ObjectPlacementConstraint>()
-                    : placementConstraints;
+                PlacementRules = placementRules ?? new List<SpatialUnderstandingDllObjectPlacement.ObjectPlacementRule>();
+                PlacementConstraints = placementConstraints ?? new List<SpatialUnderstandingDllObjectPlacement.ObjectPlacementConstraint>();
             }
 
             public SpatialUnderstandingDllObjectPlacement.ObjectPlacementDefinition PlacementDefinition;
