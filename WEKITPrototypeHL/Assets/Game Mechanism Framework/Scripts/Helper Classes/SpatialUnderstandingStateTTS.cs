@@ -13,6 +13,10 @@ namespace GameMechanism
         // Use this for initialization
         void Start()
         {
+            if (TextToSpeechManager == null)
+            {
+                TextToSpeechManager = gameObject.AddComponent<TextToSpeechManager>();
+            }
             SpatialUnderstanding.Instance.ScanStateChanged += StateChange;
         }
 
