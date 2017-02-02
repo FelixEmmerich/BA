@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace GameMechanism
 {
+    /// <summary>
+    /// Announces change in the spatial understanding state
+    /// </summary>
     public class SpatialUnderstandingStateTTS : MonoBehaviour
     {
         public TextToSpeechManager TextToSpeechManager;

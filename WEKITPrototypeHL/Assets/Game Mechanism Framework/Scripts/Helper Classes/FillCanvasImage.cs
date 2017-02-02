@@ -3,6 +3,9 @@ using UnityEngine.UI;
 
 namespace GameMechanism
 {
+    /// <summary>
+    /// Fills a GUI image. Can be called by Interactables on Enter() to visualize progress towards Stay().
+    /// </summary>
     public class FillCanvasImage : MonoBehaviour
     {
         public Image Image;

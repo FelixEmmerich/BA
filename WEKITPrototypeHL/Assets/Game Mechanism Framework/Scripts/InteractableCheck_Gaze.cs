@@ -2,6 +2,9 @@
 
 namespace GameMechanism
 {
+    /// <summary>
+    /// Checks for Interactable objects based on camera position and direction.
+    /// </summary>
     public class InteractableCheck_Gaze : InteractableCheck_RayCast
     {
         public override Vector3 RayStart

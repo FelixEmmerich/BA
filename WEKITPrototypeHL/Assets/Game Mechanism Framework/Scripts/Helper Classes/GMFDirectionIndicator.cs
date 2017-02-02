@@ -1,4 +1,4 @@
-﻿// Based on the HoloToolkit.Unity DirectionIndicator class, with adjusted variable ranges and the ability to automatically find a cursor if none is assigned. Added SetEnabled method.
+﻿// The HoloToolkit.Unity DirectionIndicator class, with adjusted variable ranges and the ability to automatically find a cursor if none is assigned. Added SetEnabled method to remove the indicator object on disabling.
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 

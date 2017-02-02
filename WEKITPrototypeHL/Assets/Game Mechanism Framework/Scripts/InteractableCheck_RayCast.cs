@@ -3,15 +3,16 @@ using UnityEngine;
 
 namespace GameMechanism
 {
+    /// <summary>
+    /// Checks for Interactable objects using a raycast.
+    /// </summary>
     public abstract class InteractableCheck_RayCast : InteractableCheck
     {
         public abstract Vector3 RayStart { get; }
 
         public abstract Vector3 RayDirection { get; }
 
-        [Tooltip(
-            "Layers checked during Raycast. If different InteractableCheck-derived scripts are active, it is best to move the targets for each to a separate layer."
-        )]
+        [Tooltip("Layers checked during Raycast. If different InteractableCheck-derived scripts are active, it is best to move the targets for each to a separate layer.")]
         public LayerMask CheckLayers;
 
         public float MaxDistance;

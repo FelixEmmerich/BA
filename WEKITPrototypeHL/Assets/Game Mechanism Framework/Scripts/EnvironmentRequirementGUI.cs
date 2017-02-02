@@ -5,25 +5,32 @@ using UnityEngine.UI;
 
 namespace GameMechanism
 {
+    /// <summary>
+    /// Display EnvironmentRequirements and their success state.
+    /// </summary>
     public class EnvironmentRequirementGUI : MonoBehaviour
     {
         public EnvironmentRequirements Requirements;
 
-        [Tooltip("GameObject is disabled on start and enabled when the scan is done and met the requirements.")] public
-            GameObject StartObject;
+        [Tooltip("GameObject is disabled on start and enabled when the requirements are met.")]
+        public GameObject StartObject;
 
-        public Text ResultsText;
+        [Tooltip("Text object where the requirements are displayed.")]
+        public Text RequirementsText;
 
-        [Tooltip("Tags in the Rich format, applied at the result screen for requirements that were met.")] public string
-            MetRequirementTags;
+        [Tooltip("Tags in the Rich format, applied for requirements that were met.")]
+        public string MetRequirementTags;
 
-        [Tooltip("Closing tags in the Rich format, applied at the result screen for requirements that were met.")] public string MetRequirementEndTags;
+        [Tooltip("Closing tags in the Rich format, applied for requirements that were met.")]
+        public string MetRequirementEndTags;
 
-        [Tooltip("Tags in the Rich format, applied at the result screen for requirements that were not met.")] public
-            string FailedRequirementTags;
+        [Tooltip("Tags in the Rich format, applied for requirements that were not met.")]
+        public string FailedRequirementTags;
 
-        [Tooltip("Closing tags in the Rich format, applied at the result screen for requirements that were met.")] public string FailedRequirementEndTags;
+        [Tooltip("Closing tags in the Rich format, applied for requirements that were not met.")]
+        public string FailedRequirementEndTags;
 
+        [Tooltip("Time between checks.")]
         public float UpdateTime = 3;
 
         private string[] _requirementStrings;
@@ -31,6 +38,7 @@ namespace GameMechanism
         // Use this for initialization
         void Start()
         {
+            _requirementStrings = RequirementsToStringArray(Requirements.Requirements);
             SpatialUnderstanding.Instance.ScanStateChanged += DisplayResults;
             SpatialUnderstanding.Instance.ScanStateChanged += BeginUpdatingResults;
             DisplayStartScreen();
@@ -39,13 +47,12 @@ namespace GameMechanism
         public void DisplayStartScreen()
         {
             StartObject.SetActive(false);
-            _requirementStrings = RequirementsToStringArray(Requirements.Requirements);
             string fullstring = "Requirements:\n";
             for (int i = 0; i < _requirementStrings.Length; i++)
             {
                 fullstring += _requirementStrings[i] + "\n";
             }
-            ResultsText.text = fullstring;
+            RequirementsText.text = fullstring;
         }
 
         public void DisplayResults()
@@ -66,8 +73,8 @@ namespace GameMechanism
                     finalText += status[i] ? MetRequirementEndTags : FailedRequirementEndTags;
                     finalText += "\n";
                 }
-                ResultsText.enabled = true;
-                ResultsText.text = finalText;
+                RequirementsText.enabled = true;
+                RequirementsText.text = finalText;
             }
             else
             {
@@ -104,8 +111,11 @@ namespace GameMechanism
 
         string RequirementToString(EnvironmentRequirements.Requirement requirement)
         {
-            string greaterthan = requirement.GreaterThanOrEqual ? "At least " : "Less than ";
-            return greaterthan + requirement.Amount + CategoryToString(requirement.Category);
+            string result="";
+            result += requirement.GreaterThanOrEqual ? "At least " : "Less than ";
+            result += requirement.Amount;
+            result += CategoryToString(requirement.Category);
+            return result;
         }
 
         string CategoryToString(EnvironmentRequirements.RequirementCategory category)

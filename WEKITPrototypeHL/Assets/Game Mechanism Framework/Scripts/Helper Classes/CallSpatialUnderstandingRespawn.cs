@@ -1,9 +1,10 @@
-﻿//Gets the SpatialUnderstandingSpawner Singleton and calls Spawn(). Can be placed called as a UnityEvent.
-
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace GameMechanism
 {
+    /// <summary>
+    /// Gets the SpatialUnderstandingSpawner Singleton and calls Spawn(). Can be called as a UnityEvent.
+    /// </summary>
     public class CallSpatialUnderstandingRespawn : MonoBehaviour
     {
         private SpatialUnderstandingSpawner _spawner;

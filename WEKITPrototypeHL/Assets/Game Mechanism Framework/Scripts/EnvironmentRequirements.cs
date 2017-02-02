@@ -4,9 +4,13 @@ using HoloToolkit.Unity;
 
 namespace GameMechanism
 {
+    /// <summary>
+    /// Requirements of the playspace.
+    /// </summary>
     public class EnvironmentRequirements : MonoBehaviour
     {
-        //Types mostly coresponding to and comments taken from PlaySpaceStats (from HoloToolkit's SpatialUnderstandingDLL)
+        //Types mostly coresponding to and comments taken from PlaySpaceStats (from HoloToolkit's SpatialUnderstandingDLL).
+        //Added NumWall, CeilingSurfaceArea, and PlatformSurfaceArea.
         public enum RequirementCategory
         {
             HorizSurfaceArea,
@@ -26,7 +30,7 @@ namespace GameMechanism
             NumWall, // Number of walls total (XNeg, XPos, ZNeg, ZPos)
             NumPlatform, // List of Area of each Horizontal not Floor surface (contains count)
             CeilingSurfaceArea, //DownSurfaceArea plus VirtualCeilingSurfaceArea
-            PlatformSurfaceArea //UpSirfaceArea minus HorizSurfaceArea
+            PlatformSurfaceArea //UpSurfaceArea minus HorizSurfaceArea
         }
 
         [Serializable]
@@ -35,8 +39,7 @@ namespace GameMechanism
             public RequirementCategory Category;
             public float Amount;
 
-            [Tooltip(
-                "How required amount is compared to actual amount. If false, a value lower than Amount is required.")]
+            [Tooltip("How required amount is compared to actual amount. If false, a value lower than Amount is required.")]
             public bool GreaterThanOrEqual;
         }
 
@@ -49,6 +52,9 @@ namespace GameMechanism
             _statsPtr = SpatialUnderstanding.Instance.UnderstandingDLL.GetStaticPlayspaceStatsPtr();
         }
 
+        /// <summary>
+        /// Checks requirements until one fails. -1 if stats are not available, 0 if at least one fails, 1 if all succeed.
+        /// </summary>
         public int CheckRequirements()
         {
             if ((SpatialUnderstandingDll.Imports.QueryPlayspaceStats(_statsPtr) != 0))
@@ -56,7 +62,7 @@ namespace GameMechanism
                 for (int i = Requirements.Length - 1; i >= 0; i--)
                 {
                     float amount = GetStatsValueFromCategory(Requirements[i].Category);
-                    //Return false if required amount does not behave to actual amount as specified
+                    //Return 0 if required amount does not behave to actual amount as specified
                     if (CheckRequirement(amount, Requirements[i]))
                     {
                         return 0;
@@ -68,6 +74,12 @@ namespace GameMechanism
             return -1;
         }
 
+        /// <summary>
+        /// Checks all requirements. -1 if stats are not available, 0 if at least one fails, 1 if all succeed.
+        /// </summary>
+        /// <param name="status">Whether the requirements were met.</param>
+        /// <param name="values">Actual values of the surveyed variables.</param>
+        /// <returns></returns>
         public int CheckAllRequirements(out bool[] status, out float[] values)
         {
             status = new bool[Requirements.Length];
@@ -80,9 +92,8 @@ namespace GameMechanism
                     float amount = GetStatsValueFromCategory(Requirements[i].Category);
 
                     values[i] = amount;
-
-                    //Return false if required amount does not behave to actual amount as specified
                     status[i] = CheckRequirement(amount, Requirements[i]);
+
                     if (!status[i])
                     {
                         result = 0;
@@ -94,11 +105,22 @@ namespace GameMechanism
             return -1;
         }
 
+        /// <summary>
+        /// Return false if required amount does not behave to actual amount as specified
+        /// </summary>
+        /// <param name="amount">Actual amount</param>
+        /// <param name="requirement"></param>
+        /// <returns></returns>
         public bool CheckRequirement(float amount, Requirement requirement)
         {
             return amount >= 0 && ((amount >= requirement.Amount) == requirement.GreaterThanOrEqual);
         }
 
+        /// <summary>
+        /// Checks all requirements. -1 if stats are not available, 0 if at least one fails, 1 if all succeed.
+        /// </summary>
+        /// <param name="status">Whether the requirements were met.</param>
+        /// <returns></returns>
         public int CheckAllRequirements(out bool[] status)
         {
             float[] values;

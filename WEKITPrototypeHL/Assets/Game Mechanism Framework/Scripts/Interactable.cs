@@ -1,9 +1,11 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 namespace GameMechanism
 {
+    /// <summary>
+    /// An object the user can interact with
+    /// </summary>
     public class Interactable : MonoBehaviour
     {
         public enum DisableConditions
@@ -14,16 +16,17 @@ namespace GameMechanism
             Exit
         }
 
-
+        /// <summary>
+        /// Disables the gameobject once the specified condition is met (after invoking events).
+        /// </summary>
         public DisableConditions DisableCondition;
-            //Dedicated variable instead of a part of EnterEvents to ensure safe order of operations
 
         public UnityEvent EnterEvents;
         public UnityEvent ExitEvents;
         public UnityEvent StayEvents;
 
-        [Tooltip("Time in seconds the object needs to remain in Enter state before Stay() is called.")] public float
-            StayDuration = 2;
+        [Tooltip("Time in seconds the object needs to remain in Enter state before Stay() is called.")]
+        public float StayDuration = 2;
 
         public void Enter()
         {

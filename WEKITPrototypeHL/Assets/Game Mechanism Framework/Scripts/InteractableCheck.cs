@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace GameMechanism
 {
+    /// <summary>
+    /// Checks for Interactable objects.
+    /// </summary>
     public abstract class InteractableCheck : MonoBehaviour
     {
 
@@ -26,6 +29,7 @@ namespace GameMechanism
             }
             else if (LastHit != null)
             {
+                //Stay method is not called in Interactable if it loses focus.
                 StopCoroutine(_stayCoroutine);
                 if (LastInteractable != null)
                 {
@@ -36,8 +40,17 @@ namespace GameMechanism
             }
         }
 
+        /// <summary>
+        /// Finds gameobjects
+        /// </summary>
+        /// <returns></returns>
         public abstract GameObject DetectObject();
 
+        /// <summary>
+        /// Checks if gameobject has an interactable component.
+        /// </summary>
+        /// <param name="go"></param>
+        /// <returns></returns>
         bool ObjectIsNewInteractable(GameObject go)
         {
             if (go != LastHit)
@@ -49,6 +62,10 @@ namespace GameMechanism
             return false;
         }
 
+        /// <summary>
+        /// Stay method is called in Interactable once a certain time has passed.
+        /// </summary>
+        /// <returns></returns>
         public IEnumerator Stay()
         {
             if (LastInteractable == null)

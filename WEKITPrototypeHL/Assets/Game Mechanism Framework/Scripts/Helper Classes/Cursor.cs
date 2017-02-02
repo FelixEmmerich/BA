@@ -5,14 +5,17 @@ namespace GameMechanism
     public class Cursor : MonoBehaviour
     {
         /// <summary>
-        /// The rotation the cursor object will have when not hitting anything. Set at start.
+        /// The rotation the cursor object will have when not hitting anything. Set automatically at start.
         /// </summary>
         private Quaternion _standardRotation;
 
         public float MaxDistance = 5;
 
-        [Tooltip("How far from the actual hitpoint the cursor is supposed to be placed (makes the cursor more visible)")
-        ] public float HitDistance = 0.01f;
+        /// <summary>
+        /// How far from the actual hitpoint the cursor is supposed to be placed (makes the cursor more visible)
+        /// </summary>
+        [Tooltip("How far from the actual hitpoint the cursor is supposed to be placed (makes the cursor more visible)")]
+        public float HitDistance = 0.01f;
 
         public LayerMask Layers;
 

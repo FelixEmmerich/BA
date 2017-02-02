@@ -4,28 +4,37 @@ using HoloToolkit.Unity;
 
 namespace GameMechanism
 {
+    /// <summary>
+    /// Spawns objects according to spatial playspace features.
+    /// </summary>
     public class SpatialUnderstandingSpawner : Singleton<SpatialUnderstandingSpawner>
     {
+        [Tooltip("Gameobject to spawn")]
         public GameObject Prefab;
+
         public SpawnInformation.PlacementTypes PlacementType;
-        [Tooltip("Half dimensions of the object to be spawned")] public Vector3 HalfDims;
-        [Tooltip("If true, spawns an object as soon as the scan is complete.")] public bool SpawnImmediately = true;
+
+        [Tooltip("Half dimensions of the object to be spawned")]
+        public Vector3 HalfDims;
+
+        [Tooltip("If true, spawns an object as soon as the scan is complete.")]
+        public bool SpawnImmediately = true;
 
         private bool _init;
         private SpatialUnderstandingDll _understandingDll;
-        public SpawnInformation.PlacementQuery PlacementQuery;
+        private SpawnInformation.PlacementQuery _placementQuery;
 
         // Use this for initialization
         void Start()
         {
             _understandingDll = SpatialUnderstanding.Instance.UnderstandingDLL;
             SpatialUnderstanding.Instance.ScanStateChanged += Init_Spawner;
-            PlacementQuery = SpawnInformation.QueryByPlacementType(PlacementType, HalfDims);
+            _placementQuery = SpawnInformation.QueryByPlacementType(PlacementType, HalfDims);
         }
 
         public void Spawn()
         {
-            Spawn(Prefab, PlacementQuery);
+            Spawn(Prefab, _placementQuery);
         }
 
         public void Spawn(GameObject prefab, SpawnInformation.PlacementTypes placementType, Vector3 halfDims)
@@ -36,10 +45,9 @@ namespace GameMechanism
 
         public void Spawn(GameObject prefab, SpawnInformation.PlacementQuery query)
         {
-            //Sollte nicht gemacht werden, bevor Scan fertig ist.
+            //Don't spawn before the scan is finished.
             if (_init)
             {
-                //DestroyObjects();
                 StartCoroutine(ObjectPlacement(prefab, query));
             }
             else

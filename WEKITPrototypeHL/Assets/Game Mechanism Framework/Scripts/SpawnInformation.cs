@@ -7,6 +7,9 @@ using UnityEngine;
 
 namespace GameMechanism
 {
+    /// <summary>
+    /// Data used for spawning objects according to playspace features.
+    /// </summary>
     public static class SpawnInformation
     {
         public struct PlacementQuery
