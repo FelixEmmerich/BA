@@ -41,6 +41,9 @@ namespace GameMechanism
             OnFloorNearMe
         }
 
+        public static float OnWallMinHeight = 0.5f;
+        public static float OnWallMaxHeight = 3f;
+
         public static PlacementQuery QueryByPlacementType(PlacementTypes type, Vector3 halfDims)
         {
             switch (type)
@@ -48,7 +51,7 @@ namespace GameMechanism
                 case PlacementTypes.OnFloor:
                     return OnFloor(halfDims);
                 case PlacementTypes.OnWall:
-                    return OnWall(halfDims, 0.5f, 3f);
+                    return OnWall(halfDims, OnWallMinHeight, OnWallMaxHeight);
                 case PlacementTypes.OnCeiling:
                     return OnCeiling(halfDims);
                 case PlacementTypes.OnEdge:

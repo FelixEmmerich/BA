@@ -48,32 +48,29 @@ namespace GameMechanism
 
         public void DisplayResults()
         {
-            if ( /*SpatialUnderstanding.Instance.ScanState==SpatialUnderstanding.ScanStates.Done*/true)
-            {
-                bool[] status;
-                float[] amount;
+            bool[] status;
+            float[] amount;
 
-                int resultInt = Requirements.CheckAllRequirements(out status, out amount);
-                if (resultInt >= 0)
+            int resultInt = Requirements.CheckAllRequirements(out status, out amount);
+            if (resultInt >= 0)
+            {
+                StartObject.SetActive(resultInt == 1);
+                string finalText = "";
+                string[] requirementTextArray = RequirementsToStringArray();
+                for (int i = 0; i < status.Length; i++)
                 {
-                    StartObject.SetActive(resultInt == 1);
-                    string finalText = "";
-                    string[] requirementTextArray = RequirementsToStringArray();
-                    for (int i = 0; i < status.Length; i++)
-                    {
-                        finalText += status[i] ? MetRequirementTags : FailedRequirementTags;
-                        finalText += requirementTextArray[i];
-                        finalText += " -> " + amount[i];
-                        finalText += status[i] ? MetRequirementEndTags : FailedRequirementEndTags;
-                        finalText += "\n";
-                    }
-                    ResultsText.enabled = true;
-                    ResultsText.text = finalText;
+                    finalText += status[i] ? MetRequirementTags : FailedRequirementTags;
+                    finalText += requirementTextArray[i];
+                    finalText += " -> " + amount[i];
+                    finalText += status[i] ? MetRequirementEndTags : FailedRequirementEndTags;
+                    finalText += "\n";
                 }
-                else
-                {
-                    Debug.Log("Scan not done yet");
-                }
+                ResultsText.enabled = true;
+                ResultsText.text = finalText;
+            }
+            else
+            {
+                Debug.Log("Scan not done yet");
             }
         }
 
@@ -144,6 +141,10 @@ namespace GameMechanism
                     return " wall surfaces";
                 case EnvironmentRequirements.RequirementCategory.NumPlatform:
                     return " horizontal surfaces other than ground";
+                case EnvironmentRequirements.RequirementCategory.CeilingSurfaceArea:
+                    return "m² of ceiling surface area";
+                case EnvironmentRequirements.RequirementCategory.PlatformSurfaceArea:
+                    return "m² of platform surface area";
                 default:
                     return category.ToString();
             }

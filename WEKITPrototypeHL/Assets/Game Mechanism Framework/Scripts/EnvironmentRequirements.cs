@@ -6,7 +6,7 @@ namespace GameMechanism
 {
     public class EnvironmentRequirements : MonoBehaviour
     {
-        //Types coresponding to and comments taken from PlaySpaceStats (from HoloToolkit's SpatialUnderstandingDLL)
+        //Types mostly coresponding to and comments taken from PlaySpaceStats (from HoloToolkit's SpatialUnderstandingDLL)
         public enum RequirementCategory
         {
             HorizSurfaceArea,
@@ -24,7 +24,9 @@ namespace GameMechanism
             NumWall_ZNeg, // List of Area of each Wall ZNeg surface (contains count)
             NumWall_ZPos, // List of Area of each Wall ZPos surface (contains count)
             NumWall, // Number of walls total (XNeg, XPos, ZNeg, ZPos)
-            NumPlatform // List of Area of each Horizontal not Floor surface (contains count)
+            NumPlatform, // List of Area of each Horizontal not Floor surface (contains count)
+            CeilingSurfaceArea, //DownSurfaceArea plus VirtualCeilingSurfaceArea
+            PlatformSurfaceArea //UpSirfaceArea minus HorizSurfaceArea
         }
 
         [Serializable]
@@ -103,6 +105,10 @@ namespace GameMechanism
         {
             SpatialUnderstandingDll.Imports.PlayspaceStats stats =
                 SpatialUnderstanding.Instance.UnderstandingDLL.GetStaticPlayspaceStats();
+            /*
+                         SpatialUnderstandingDll.Imports.PlayspaceAlignment alignment =
+                SpatialUnderstanding.Instance.UnderstandingDLL.GetStaticPlayspaceAlignment();
+             */
             switch (category)
             {
                 case RequirementCategory.HorizSurfaceArea:
@@ -135,6 +141,10 @@ namespace GameMechanism
                     return stats.NumWall_XPos + stats.NumWall_XNeg + stats.NumWall_ZNeg + stats.NumWall_ZPos;
                 case RequirementCategory.NumPlatform:
                     return stats.NumPlatform;
+                case RequirementCategory.CeilingSurfaceArea:
+                    return stats.DownSurfaceArea + stats.VirtualCeilingSurfaceArea;
+                case RequirementCategory.PlatformSurfaceArea:
+                    return stats.UpSurfaceArea - stats.HorizSurfaceArea;
                 default:
                     Debug.Log("Category not defined");
                     return -1;
