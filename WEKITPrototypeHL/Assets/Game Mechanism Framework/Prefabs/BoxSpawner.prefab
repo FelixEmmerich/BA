@@ -52,6 +52,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefab: {fileID: 1856898716889386, guid: 02eda142a8cb41d4f83f917432f9bfa4, type: 2}
-  PlacementType: 2
+  PlacementType: 0
   HalfDims: {x: 0.25, y: 0.25, z: 0.25}
   SpawnImmediately: 1
