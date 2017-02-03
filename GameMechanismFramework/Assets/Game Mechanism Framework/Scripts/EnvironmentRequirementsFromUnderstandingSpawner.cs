@@ -15,10 +15,27 @@ namespace GameMechanism
         // Use this for initialization
         void Start()
         {
+            if (Spawner == null)
+            {
+                Spawner = SpatialUnderstandingSpawner.Instance;
+            }
 
         }
 
-        /*
+        public void SetRequirementsFromSpawner()
+        {
+            SetRequirements(ref Requirements.Requirements,Spawner.PlacementType,Spawner.HalfDims);
+        }
+
+        static void SetRequirements(ref EnvironmentRequirements.Requirement[] requirements, SpawnInformation.PlacementTypes placementType, Vector3 halfDims)
+        {
+            EnvironmentRequirements.Requirement[] tempRequirements = GenerateRequirements(placementType, halfDims);
+            if (tempRequirements != null)
+            {
+                requirements = tempRequirements;
+            }
+        }
+
         public static EnvironmentRequirements.Requirement[] GenerateRequirements(SpawnInformation.PlacementTypes placementType, Vector3 halfDims)
         {
             switch (placementType)
@@ -34,19 +51,18 @@ namespace GameMechanism
                 case SpawnInformation.PlacementTypes.OnFloorAndCeiling:
                     return OnFloorAndCeiling(halfDims);
                 case SpawnInformation.PlacementTypes.RandomInAirAwayFromMe:
-                    break;
+                    return null;
                 case SpawnInformation.PlacementTypes.OnEdgeNearCenter:
-                    break;
+                    return OnEdge(halfDims);
                 case SpawnInformation.PlacementTypes.OnFloorAwayFromMe:
-                    break;
+                    return OnFloor(halfDims);
                 case SpawnInformation.PlacementTypes.OnFloorNearMe:
-                    break;
+                    return OnFloor(halfDims);
                 default:
-                    return new EnvironmentRequirements.Requirement[0];
+                    return null;
             }
         }
-        */
-
+        
         public static EnvironmentRequirements.Requirement[] OnFloor(Vector3 halfDims)
         {
             EnvironmentRequirements.Requirement[] requirements = new EnvironmentRequirements.Requirement[1];

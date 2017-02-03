@@ -44,6 +44,8 @@ namespace GameMechanism
         }
 
         public Requirement[] Requirements;
+        /*[Tooltip("If false, requirements can be set and RequirementsSet invoked later")]
+        public bool RequirementsSetAtStart=true;*/
 
         private IntPtr _statsPtr;
 
