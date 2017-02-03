@@ -62,7 +62,7 @@ GameObject:
   - component: {fileID: 114875641686236648}
   - component: {fileID: 114279433266797850}
   m_Layer: 30
-  m_Name: MovementTarget
+  m_Name: PointOfInterest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
