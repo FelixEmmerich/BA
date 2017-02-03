@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="GameMechanism.EnvironmentRequirementGUI" Collapsed="true">
-    <Position X="12.5" Y="0.5" Width="2.25" />
+    <Position X="13.25" Y="0.5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAQggIAACAAAQAgEAAAACAAEAIESAAAACAAAAIAAAA=</HashCode>
       <FileName>Assets\Game Mechanism Framework\Scripts\EnvironmentRequirementGUI.cs</FileName>
@@ -11,21 +11,21 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="GameMechanism.EnvironmentRequirements" Collapsed="true">
-    <Position X="9.25" Y="0.5" Width="2" />
+    <Position X="10" Y="0.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAABACAAAAAAAAABAAAAAAIAAAAAAAIAAgAAAgA=</HashCode>
+      <HashCode>AAAAAAABACAAAAAAKAABAAAAAAIAAAAAAAIAAgAAAgA=</HashCode>
       <FileName>Assets\Game Mechanism Framework\Scripts\EnvironmentRequirements.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GameMechanism.InformationFilter_Distance" Collapsed="true">
-    <Position X="10.25" Y="3.75" Width="2" />
+    <Position X="7.25" Y="5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AQAAAECAACAAAAAAAIAAAAAAAAAABAAAAIAAAAAAAAA=</HashCode>
       <FileName>Assets\Game Mechanism Framework\Scripts\InformationFilter_Distance.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GameMechanism.Interactable" Collapsed="true">
-    <Position X="6.25" Y="0.5" Width="1.5" />
+    <Position X="6.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AIAAAAAAACAAAAAAQAAAACAAAAAEAAAQIAABAABAAAg=</HashCode>
       <FileName>Assets\Game Mechanism Framework\Scripts\Interactable.cs</FileName>
@@ -56,21 +56,21 @@
     </TypeIdentifier>
   </Class>
   <Class Name="GameMechanism.InteractableCheck_RayCast" Collapsed="true">
-    <Position X="3.5" Y="1.75" Width="2" />
+    <Position X="3.5" Y="2" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAQAAAAAAAAAAEAAEAAAAAAAABAAAE=</HashCode>
       <FileName>Assets\Game Mechanism Framework\Scripts\InteractableCheck_RayCast.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GameMechanism.SpatialUnderstandingSpawner" Collapsed="true">
-    <Position X="8.75" Y="2.25" Width="2.5" />
+    <Position X="9.75" Y="3.5" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAIAAACAAAAAAAg2ACIABAAAAAAAAAAIAAAAAgAA=</HashCode>
       <FileName>Assets\Game Mechanism Framework\Scripts\SpatialUnderstandingSpawner.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GameMechanism.SpawnInformation" Collapsed="true">
-    <Position X="11.5" Y="2.25" Width="1.75" />
+    <Position X="13.25" Y="3.5" Width="1.75" />
     <NestedTypes>
       <Struct Name="GameMechanism.SpawnInformation.PlacementQuery" Collapsed="true">
         <TypeIdentifier>
@@ -87,6 +87,17 @@
       <HashCode>AAEAAQgAAAAAAAAABAAQgAAAAAAAAkQBAQAAAAAAAAA=</HashCode>
       <FileName>Assets\Game Mechanism Framework\Scripts\SpawnInformation.cs</FileName>
     </TypeIdentifier>
+  </Class>
+  <Class Name="GameMechanism.EnvironmentRequirementsFromUnderstandingSpawner" Collapsed="true">
+    <Position X="9" Y="2" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAACQAAAAABAAAAAgAAAIAAEUBAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Game Mechanism Framework\Scripts\EnvironmentRequirementsFromUnderstandingSpawner.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="Requirements" />
+      <Field Name="Spawner" />
+    </ShowAsAssociation>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
