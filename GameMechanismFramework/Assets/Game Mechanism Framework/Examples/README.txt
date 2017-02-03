@@ -5,7 +5,7 @@ Once scanning is completed, a box will be spawned according to the PlacementType
 The default setting will put the box on the floor somewhere.
 Look at the box (from a distance of 2 meters or less) to make a timer start; once it is completed, the box will disappear and a new one will spawn.
 
-* EnvironmentalRequirements: When the program starts, requirements to the playspace are listed on a GUI element in front of you.
+* EnvironmentRequirements: When the program starts, requirements to the playspace are listed on a GUI element in front of you.
 These requirements are set on the Requirements gameObject.
 Say "Scan" or look at the corresponding button and perform an air-tap gesture to start scanning.
 The GUI menu will follow you, updating every few seconds.
@@ -20,6 +20,10 @@ the coordinate system is created at the start of the application, so look at an 
 As you approach the target, events occur according to your distance from it. 
 These are set in the InformationFilter_Distance script on the Target gameObject.
 Although some events (mainly Text to Speech) may not work correctly, this scene is functional without a HoloLens - simply translate the camera.
+
+* SpawnRequirements: A combination of BoxSpawner and EnvironmentRequirements.
+Generates requirements from the spawner, checks them and allows the user to start the spawner once they are met.
+Requirement generation works in ther editor.
 
 * TestScene: A simple scene containing a Point of Interest and Gaze Point of Interest, as well as a regular cube for testing the cursor.
 Look at or away from the GazeTarget gameObject or move to or away from the MovementTarget gameObject to trigger actions.

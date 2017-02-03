@@ -14,6 +14,9 @@ The spatial understanding features of the device are further utilized in Spatial
 an implementation of ENVIRONMENT-ADAPTION which uses predefined sets of rules and constraints from SpawnInformation to find suitable spots for instantiating objects, 
 e.g. on a wall or on a floor, far from the player.
 
+EnvironmentRequirementsFromUnderstandingSpawner provides a bridge between the two previous mechanisms 
+by generating simple requirements from the parameters of a SpatialUnderstandingSpawner.
+
 Finally, InformationFilter_Distance is – as the name suggests – a variant on INFORMATION FILTERING, 
 based on the distance between the user and an object (and thus an alternative approach to POINT OF INTEREST). 
 Events are invoked when the user enters or leaves certain ranges.
