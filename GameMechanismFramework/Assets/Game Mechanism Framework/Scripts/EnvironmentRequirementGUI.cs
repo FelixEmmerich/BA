@@ -39,13 +39,14 @@ namespace GameMechanism
         void Start()
         {
             Requirements.RequirementsSet.AddListener(DisplayStartScreen);
-            _requirementStrings = RequirementsToStringArray(Requirements.Requirements);
             SpatialUnderstanding.Instance.ScanStateChanged += DisplayResults;
             SpatialUnderstanding.Instance.ScanStateChanged += BeginUpdatingResults;
         }
 
         public void DisplayStartScreen()
         {
+            _requirementStrings = RequirementsToStringArray(Requirements.Requirements);
+
             StartObject.SetActive(false);
             string fullstring = "Requirements:\n";
             for (int i = 0; i < _requirementStrings.Length; i++)
