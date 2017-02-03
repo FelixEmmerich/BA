@@ -331,12 +331,14 @@
   <ItemGroup>
     <None Include="Assets\Game Mechanism Framework\Examples\README.txt" />
     <None Include="Assets\Game Mechanism Framework\Scripts\ClassDiagram1.cd" />
+    <None Include="Assets\Game Mechanism Framework\Scripts\README.txt" />
     <None Include="Assets\Game Mechanism Framework\Utilities\Shaders\StandardFast.shader" />
     <None Include="Assets\HoloToolkit\Input\Shaders\Cursor.shader" />
     <None Include="Assets\HoloToolkit\Input\Shaders\CursorShader.shader" />
     <None Include="Assets\HoloToolkit\Input\Shaders\EditorHands.shader" />
     <None Include="Assets\HoloToolkit\Input\Shaders\SpecularHighlight.shader" />
     <None Include="Assets\HoloToolkit\Input\Tests\Shaders\button_unlit_shader.shader" />
+    <None Include="Assets\HoloToolkit\License.txt" />
     <None Include="Assets\HoloToolkit\SpatialMapping\Shaders\Occlusion.shader" />
     <None Include="Assets\HoloToolkit\SpatialMapping\Shaders\SpatialMappingTap.shader" />
     <None Include="Assets\HoloToolkit\SpatialMapping\Shaders\Wireframe.shader" />

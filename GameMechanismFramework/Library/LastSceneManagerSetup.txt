@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Game Mechanism Framework/Examples/EnvironmentRequirements.unity
+- path: Assets/Game Mechanism Framework/Examples/SpawnRequirements.unity
   isLoaded: 1
   isActive: 1
