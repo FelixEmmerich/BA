@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using HoloToolkit.Unity;
+using UnityEngine.Events;
 
 namespace GameMechanism
 {
@@ -44,14 +45,22 @@ namespace GameMechanism
         }
 
         public Requirement[] Requirements;
-        /*[Tooltip("If false, requirements can be set and RequirementsSet invoked later")]
-        public bool RequirementsSetAtStart=true;*/
+
+        [Tooltip("If false, requirements can be set and RequirementsSet invoked later.")]
+        public bool RequirementsSetAtStart=true;
+
+        [Tooltip("Called once requirements are set")]
+        public UnityEvent RequirementsSet;
 
         private IntPtr _statsPtr;
 
         void Start()
         {
             _statsPtr = SpatialUnderstanding.Instance.UnderstandingDLL.GetStaticPlayspaceStatsPtr();
+            if (RequirementsSetAtStart)
+            {
+                RequirementsSet.Invoke();
+            }
         }
 
         /// <summary>

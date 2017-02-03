@@ -1,12 +1,10 @@
-﻿//Generate EnvironmentRequirements data from SpatialUnderstandingSpawner data. Note that the accuracy is limited, as available general data is very restricted (e.g. limited to surface stats, no information on space between surfaces).
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using HoloToolkit.Unity;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace GameMechanism
 {
+    /// <summary>
+    /// //Generate EnvironmentRequirements data from SpatialUnderstandingSpawner data. Note that the accuracy is limited, as available general data is very restricted (e.g. limited to surface stats, no information on space between surfaces).
+    /// </summary>
     public class EnvironmentRequirementsFromUnderstandingSpawner : MonoBehaviour
     {
         public SpatialUnderstandingSpawner Spawner;
@@ -19,15 +17,23 @@ namespace GameMechanism
             {
                 Spawner = SpatialUnderstandingSpawner.Instance;
             }
-
+            if (Spawner != null)
+            {
+                SetRequirements();
+            }
         }
 
-        public void SetRequirementsFromSpawner()
+        public void SetRequirements()
         {
-            SetRequirements(ref Requirements.Requirements,Spawner.PlacementType,Spawner.HalfDims);
+            if (Requirements != null)
+            {
+                SetRequirements(ref Requirements.Requirements, Spawner.PlacementType, Spawner.HalfDims);
+                Requirements.RequirementsSet.Invoke();
+            }
         }
 
-        static void SetRequirements(ref EnvironmentRequirements.Requirement[] requirements, SpawnInformation.PlacementTypes placementType, Vector3 halfDims)
+        public static void SetRequirements(ref EnvironmentRequirements.Requirement[] requirements,
+            SpawnInformation.PlacementTypes placementType, Vector3 halfDims)
         {
             EnvironmentRequirements.Requirement[] tempRequirements = GenerateRequirements(placementType, halfDims);
             if (tempRequirements != null)
@@ -36,7 +42,8 @@ namespace GameMechanism
             }
         }
 
-        public static EnvironmentRequirements.Requirement[] GenerateRequirements(SpawnInformation.PlacementTypes placementType, Vector3 halfDims)
+        public static EnvironmentRequirements.Requirement[] GenerateRequirements(
+            SpawnInformation.PlacementTypes placementType, Vector3 halfDims)
         {
             switch (placementType)
             {
@@ -62,7 +69,7 @@ namespace GameMechanism
                     return null;
             }
         }
-        
+
         public static EnvironmentRequirements.Requirement[] OnFloor(Vector3 halfDims)
         {
             EnvironmentRequirements.Requirement[] requirements = new EnvironmentRequirements.Requirement[1];
@@ -110,5 +117,5 @@ namespace GameMechanism
             requirements[1].Category = EnvironmentRequirements.RequirementCategory.CeilingSurfaceArea;
             return requirements;
         }
-    } 
+    }
 }

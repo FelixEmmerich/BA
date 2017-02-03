@@ -38,10 +38,10 @@ namespace GameMechanism
         // Use this for initialization
         void Start()
         {
+            Requirements.RequirementsSet.AddListener(DisplayStartScreen);
             _requirementStrings = RequirementsToStringArray(Requirements.Requirements);
             SpatialUnderstanding.Instance.ScanStateChanged += DisplayResults;
             SpatialUnderstanding.Instance.ScanStateChanged += BeginUpdatingResults;
-            DisplayStartScreen();
         }
 
         public void DisplayStartScreen()
