@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace GameMechanism
 {
@@ -23,13 +24,32 @@ namespace GameMechanism
             }
         }
 
+        /*
+        /// <summary>
+        /// Create a list without 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        private List<SpatialUnderstandingSpawner.SpawnData> CreateReducedSpawnDataList(SpatialUnderstandingSpawner.SpawnData[] data)
+        {
+
+        }
+        */
+
         public void SetRequirements()
         {
+            /*
             if (Requirements != null)
             {
+                List<SpatialUnderstandingSpawner.SpawnData> list;
+                for (int i = 0; i < Spawner.Data.Length; i++)
+                {
+                    
+                }
                 SetRequirements(ref Requirements.Requirements, Spawner.PlacementType, Spawner.HalfDims);
                 Requirements.RequirementsSet.Invoke();
             }
+            */
         }
 
         public static void SetRequirements(ref EnvironmentRequirements.Requirement[] requirements,
