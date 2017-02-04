@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace GameMechanism
@@ -8,57 +9,142 @@ namespace GameMechanism
     /// </summary>
     public class EnvironmentRequirementsFromUnderstandingSpawner : MonoBehaviour
     {
-        public SpatialUnderstandingSpawner Spawner;
-        public EnvironmentRequirements Requirements;
+        public SpatialUnderstandingSpawner SpawnerRef;
+        public EnvironmentRequirements RequirementsRef;
 
         // Use this for initialization
         void Start()
         {
-            if (Spawner == null)
+            if (SpawnerRef == null)
             {
-                Spawner = SpatialUnderstandingSpawner.Instance;
+                SpawnerRef = SpatialUnderstandingSpawner.Instance;
             }
-            if (Spawner != null)
+            if (SpawnerRef != null)
             {
                 SetRequirements();
             }
         }
 
-        /*
+        
         /// <summary>
-        /// Create a list without 
+        /// Create a list without overlapping placement types.
         /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
         private List<SpatialUnderstandingSpawner.SpawnData> CreateReducedSpawnDataList(SpatialUnderstandingSpawner.SpawnData[] data)
         {
-
+            List<SpatialUnderstandingSpawner.SpawnData> result=new List<SpatialUnderstandingSpawner.SpawnData>();
+            for (int i = 0; i<data.Length; i++)
+            {
+                bool newType = true;
+                for (int j = 0; j < result.Count; j++)
+                {
+                    //if placement type is already contained in list, make the half dimensions big enough to fit all requirements
+                    if (data[i].PlacementType == result[j].PlacementType)
+                    {
+                        newType = false;
+                        SpatialUnderstandingSpawner.SpawnData newData = new SpatialUnderstandingSpawner.SpawnData()
+                        {
+                            HalfDims = CombineVectors(data[i].HalfDims,result[j].HalfDims),
+                            PlacementType = data[i].PlacementType
+                        };
+                        result.Add(newData);
+                        break;
+                    }
+                }
+                if (newType)
+                {
+                    SpatialUnderstandingSpawner.SpawnData newData = new SpatialUnderstandingSpawner.SpawnData()
+                    {
+                        HalfDims = data[i].HalfDims,
+                        PlacementType = data[i].PlacementType
+                    };
+                    result.Add(newData);
+                }
+            }
+            return result;
         }
-        */
+
+        public List<EnvironmentRequirements.Requirement> CreateReducedRequirementList(List<EnvironmentRequirements.Requirement> requirements)
+        {
+            List<EnvironmentRequirements.Requirement> result = new List<EnvironmentRequirements.Requirement>();
+            for (int i = 0; i < requirements.Count; i++)
+            {
+                bool newType = true;
+                for (int j = 0; j < result.Count; j++)
+                {
+                    //if placement type is already contained in list, make the half dimensions big enough to fit all requirements
+                    if (requirements[i].Category == result[j].Category)
+                    {
+                        newType = false;
+                        EnvironmentRequirements.Requirement newRequirement = new EnvironmentRequirements.Requirement()
+                        {
+                            //Under the given circumstances (requirements based on objects to spawn) we are always looking for a greater value
+                            Amount = Mathf.Max(requirements[i].Amount, result[j].Amount),
+                            Category = requirements[i].Category,
+                            GreaterThanOrEqual = true
+                        };
+                        result.Add(newRequirement);
+                        break;
+                    }
+                }
+                if (newType)
+                {
+                    EnvironmentRequirements.Requirement newRequirement = new EnvironmentRequirements.Requirement()
+                    {
+                        //Under the given circumstances (requirements based on objects to spawn) we are always looking for a greater value
+                        Amount = requirements[i].Amount,
+                        Category = requirements[i].Category,
+                        GreaterThanOrEqual = true
+                    };
+                    result.Add(newRequirement);
+                }
+            }
+            return result;
+        }
+
+        /// <summary>The maximum for each value in the vector
+        /// </summary>
+        private Vector3 CombineVectors(Vector3 v1, Vector3 v2)
+        {
+            Vector3 result = new Vector3();
+            result.x = Mathf.Max(v1.x, v2.x);
+            result.y = Mathf.Max(v1.y, v2.y);
+            result.z = Mathf.Max(v1.z, v2.z);
+            return result;
+        }
 
         public void SetRequirements()
         {
-            /*
-            if (Requirements != null)
+            
+            if (RequirementsRef != null)
             {
-                List<SpatialUnderstandingSpawner.SpawnData> list;
-                for (int i = 0; i < Spawner.Data.Length; i++)
+                //Put all spawndata in one list without redundancies
+                List<SpatialUnderstandingSpawner.SpawnData> data = CreateReducedSpawnDataList(SpawnerRef.Data);
+
+                List<EnvironmentRequirements.Requirement> requirements = new List<EnvironmentRequirements.Requirement>();
+
+                //Create a list of requirements from the spawndata
+                for (int i = 0; i < data.Count; i++)
                 {
-                    
+                    SetRequirements(ref requirements, data[i].PlacementType, data[i].HalfDims);
                 }
-                SetRequirements(ref Requirements.Requirements, Spawner.PlacementType, Spawner.HalfDims);
-                Requirements.RequirementsSet.Invoke();
+
+                //Remove redundancies
+                requirements = CreateReducedRequirementList(requirements);
+
+                //Assign result
+                RequirementsRef.Requirements = requirements.ToArray();
+                RequirementsRef.RequirementsSet.Invoke();
             }
-            */
+            
         }
 
-        public static void SetRequirements(ref EnvironmentRequirements.Requirement[] requirements,
+        public static void SetRequirements(ref List<EnvironmentRequirements.Requirement> requirements,
             SpawnInformation.PlacementTypes placementType, Vector3 halfDims)
         {
             EnvironmentRequirements.Requirement[] tempRequirements = GenerateRequirements(placementType, halfDims);
             if (tempRequirements != null)
             {
-                requirements = tempRequirements;
+                requirements.AddRange(tempRequirements);
             }
         }
 

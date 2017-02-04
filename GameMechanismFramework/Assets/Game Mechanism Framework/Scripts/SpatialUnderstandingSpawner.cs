@@ -15,7 +15,7 @@ namespace GameMechanism
         public struct SpawnData
         {
             public GameObject Prefab;
-            public SpawnInformation.PlacementTypes[] PlacementTypes;
+            public SpawnInformation.PlacementTypes PlacementType;
             public Vector3 HalfDims;
         }
 
@@ -54,8 +54,7 @@ namespace GameMechanism
             if (index >= 0 && index < Data.Length)
             {
                 SpawnData data = Data[index];
-                index = Random.Range(0, data.PlacementTypes.Length - 1);
-                SpawnInformation.PlacementTypes placementType = data.PlacementTypes[index];
+                SpawnInformation.PlacementTypes placementType = data.PlacementType;
                 SpawnInformation.PlacementQuery query = SpawnInformation.QueryByPlacementType(placementType,
                     data.HalfDims);
 
