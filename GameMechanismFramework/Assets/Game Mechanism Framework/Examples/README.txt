@@ -21,10 +21,12 @@ As you approach the target, events occur according to your distance from it.
 These are set in the InformationFilter_Distance script on the Target gameObject.
 Although some events (mainly Text to Speech) may not work correctly, this scene is functional without a HoloLens - simply translate the camera.
 
-* SpawnRequirements: A combination of BoxSpawner and EnvironmentRequirements.
-Generates requirements from the spawner, checks them and allows the user to start the spawner once they are met.
-Requirement generation works in ther editor.
-
 * TestScene: A simple scene containing a Point of Interest and Gaze Point of Interest, as well as a regular cube for testing the cursor.
 Look at or away from the GazeTarget gameObject or move to or away from the MovementTarget gameObject to trigger actions.
 Although some events (mainly Text to Speech) may not work correctly, this scene is functional without a HoloLens - simply translate or rotate the camera.
+
+* AllMechanisms: A scene combining all mechanics. Requirements (see "EnvironmentRequirements above") are generated automatically from the data on the BoxSpawner object.
+After the user has finished scanning (pressed "Start" once it appeared), a box will be spawned - 
+either a Point of Interest on the floor or a Gaze Point of Interest on a wall. The direction towards these will be indicated until the user is at a certain proximity 
+(through an Information Filter).
+Once a box has been triggered (by position or gaze respectively), a new one will spawn.

@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Data:
-  - Prefab: {fileID: 1856898716889386, guid: 02eda142a8cb41d4f83f917432f9bfa4, type: 2}
+  - Prefab: {fileID: 1856898716889386, guid: 2b5464e96f062a441a471f8d040e68f7, type: 2}
     PlacementType: 1
     HalfDims: {x: 0.125, y: 0.125, z: 0.125}
   - Prefab: {fileID: 1856898716889386, guid: 155396bb66d3cae439c6b575bbedaa58, type: 2}

@@ -1,4 +1,4 @@
-The framework consists of nine core scripts and a few helper classes 
+The framework consists of eleven core scripts and a few helper classes 
 (which are applied in the example scenes or can be used for testing but are not essential or are heavily based on existing scripts). 
 
 Interactable, InteractableCheck_Gaze, and InteractableCheck_Position together form the basis for the mechanisms POINT OF INTEREST and GAZE POINT OF INTEREST. 
