@@ -634,8 +634,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c086e916fb501541ba92bc099c6d074, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Spawner: {fileID: 1395274225}
-  Requirements: {fileID: 1817420605}
+  SpawnerRef: {fileID: 1395274225}
+  RequirementsRef: {fileID: 1817420605}
 --- !u!4 &834652307
 Transform:
   m_ObjectHideFlags: 0
@@ -709,6 +709,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114083937707170832, guid: ac2fee75d6d60214385e9263e2ddd2e3,
+        type: 2}
+      propertyPath: Requirements.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 114318153465211320, guid: ac2fee75d6d60214385e9263e2ddd2e3,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -775,6 +780,51 @@ Prefab:
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114083937707170832, guid: ac2fee75d6d60214385e9263e2ddd2e3,
+        type: 2}
+      propertyPath: Requirements.Array.data[0].Amount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114083937707170832, guid: ac2fee75d6d60214385e9263e2ddd2e3,
+        type: 2}
+      propertyPath: Requirements.Array.data[0].GreaterThanOrEqual
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114083937707170832, guid: ac2fee75d6d60214385e9263e2ddd2e3,
+        type: 2}
+      propertyPath: Requirements.Array.data[1].Category
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114083937707170832, guid: ac2fee75d6d60214385e9263e2ddd2e3,
+        type: 2}
+      propertyPath: Requirements.Array.data[1].Amount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114083937707170832, guid: ac2fee75d6d60214385e9263e2ddd2e3,
+        type: 2}
+      propertyPath: Requirements.Array.data[2].Category
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114083937707170832, guid: ac2fee75d6d60214385e9263e2ddd2e3,
+        type: 2}
+      propertyPath: Requirements.Array.data[2].Amount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114083937707170832, guid: ac2fee75d6d60214385e9263e2ddd2e3,
+        type: 2}
+      propertyPath: Requirements.Array.data[2].GreaterThanOrEqual
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114083937707170832, guid: ac2fee75d6d60214385e9263e2ddd2e3,
+        type: 2}
+      propertyPath: Requirements.Array.data[0].Category
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114083937707170832, guid: ac2fee75d6d60214385e9263e2ddd2e3,
+        type: 2}
+      propertyPath: Requirements.Array.data[1].GreaterThanOrEqual
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ac2fee75d6d60214385e9263e2ddd2e3, type: 2}

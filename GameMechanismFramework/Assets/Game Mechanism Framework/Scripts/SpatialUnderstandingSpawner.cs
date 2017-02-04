@@ -1,8 +1,9 @@
-﻿using System.Collections;
-using System.Security.AccessControl;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using HoloToolkit.Unity;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 namespace GameMechanism
 {
@@ -12,6 +13,7 @@ namespace GameMechanism
     public class SpatialUnderstandingSpawner : Singleton<SpatialUnderstandingSpawner>
     {
 
+        [Serializable]
         public struct SpawnData
         {
             public GameObject Prefab;
