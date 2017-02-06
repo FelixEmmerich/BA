@@ -636,6 +636,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnerRef: {fileID: 1395274225}
   RequirementsRef: {fileID: 1817420605}
+  Additive: 0
 --- !u!4 &834652307
 Transform:
   m_ObjectHideFlags: 0
@@ -832,12 +833,12 @@ Prefab:
     - target: {fileID: 114083937707170832, guid: ac2fee75d6d60214385e9263e2ddd2e3,
         type: 2}
       propertyPath: Requirements.Array.data[0].Amount
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114083937707170832, guid: ac2fee75d6d60214385e9263e2ddd2e3,
         type: 2}
       propertyPath: Requirements.Array.data[0].GreaterThanOrEqual
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114083937707170832, guid: ac2fee75d6d60214385e9263e2ddd2e3,
         type: 2}
@@ -867,7 +868,7 @@ Prefab:
     - target: {fileID: 114083937707170832, guid: ac2fee75d6d60214385e9263e2ddd2e3,
         type: 2}
       propertyPath: Requirements.Array.data[0].Category
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114083937707170832, guid: ac2fee75d6d60214385e9263e2ddd2e3,
         type: 2}

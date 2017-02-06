@@ -10,6 +10,8 @@ namespace GameMechanism
     {
         public SpatialUnderstandingSpawner SpawnerRef;
         public EnvironmentRequirements RequirementsRef;
+        [Tooltip("If true, generated requirements are added to the existing list instead of replacing it.")]
+        public bool Additive;
 
         // Use this for initialization
         void Start()
@@ -125,6 +127,11 @@ namespace GameMechanism
                 for (int i = 0; i < data.Count; i++)
                 {
                     SetRequirements(ref requirements, data[i].PlacementType, data[i].HalfDims);
+                }
+
+                if (Additive)
+                {
+                    requirements.AddRange(RequirementsRef.Requirements);
                 }
 
                 //Remove redundancies
