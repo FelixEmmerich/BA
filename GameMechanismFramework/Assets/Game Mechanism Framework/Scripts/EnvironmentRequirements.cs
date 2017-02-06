@@ -68,7 +68,7 @@ namespace GameMechanism
         /// </summary>
         public int CheckRequirements()
         {
-            if ((SpatialUnderstandingDll.Imports.QueryPlayspaceStats(_statsPtr) != 0))
+            if (SpatialUnderstandingDll.Imports.QueryPlayspaceStats(_statsPtr) != 0)
             {
                 for (int i = Requirements.Length - 1; i >= 0; i--)
                 {
@@ -142,10 +142,7 @@ namespace GameMechanism
         {
             SpatialUnderstandingDll.Imports.PlayspaceStats stats =
                 SpatialUnderstanding.Instance.UnderstandingDLL.GetStaticPlayspaceStats();
-            /*
-                         SpatialUnderstandingDll.Imports.PlayspaceAlignment alignment =
-                SpatialUnderstanding.Instance.UnderstandingDLL.GetStaticPlayspaceAlignment();
-             */
+
             switch (category)
             {
                 case RequirementCategory.HorizSurfaceArea:
