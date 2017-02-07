@@ -112,7 +112,7 @@ namespace GameMechanism
         string RequirementToString(EnvironmentRequirements.Requirement requirement)
         {
             string result="";
-            result += requirement.GreaterThanOrEqual ? "At least " : "Less than ";
+            result += requirement.Minimum ? "At least " : "Less than ";
             result += requirement.Amount;
             result += CategoryToString(requirement.Category);
             return result;

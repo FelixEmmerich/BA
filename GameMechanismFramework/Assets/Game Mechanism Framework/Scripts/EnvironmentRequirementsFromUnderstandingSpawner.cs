@@ -81,7 +81,7 @@ namespace GameMechanism
                             //Under the given circumstances (requirements based on objects to spawn) we are always looking for a greater value
                             Amount = Mathf.Max(requirements[i].Amount, result[j].Amount),
                             Category = requirements[i].Category,
-                            GreaterThanOrEqual = true
+                            Minimum = true
                         };
                         result.Add(newRequirement);
                         break;
@@ -94,7 +94,7 @@ namespace GameMechanism
                         //Under the given circumstances (requirements based on objects to spawn) we are always looking for a greater value
                         Amount = requirements[i].Amount,
                         Category = requirements[i].Category,
-                        GreaterThanOrEqual = true
+                        Minimum = true
                     };
                     result.Add(newRequirement);
                 }
@@ -185,7 +185,7 @@ namespace GameMechanism
         public static EnvironmentRequirements.Requirement[] OnFloor(Vector3 halfDims)
         {
             EnvironmentRequirements.Requirement[] requirements = new EnvironmentRequirements.Requirement[1];
-            requirements[0].GreaterThanOrEqual = true;
+            requirements[0].Minimum = true;
             requirements[0].Amount = halfDims.x * halfDims.z * 4;
             requirements[0].Category = EnvironmentRequirements.RequirementCategory.HorizSurfaceArea;
             return requirements;
@@ -194,7 +194,7 @@ namespace GameMechanism
         public static EnvironmentRequirements.Requirement[] OnWall(Vector3 halfDims)
         {
             EnvironmentRequirements.Requirement[] requirements = new EnvironmentRequirements.Requirement[1];
-            requirements[0].GreaterThanOrEqual = true;
+            requirements[0].Minimum = true;
             requirements[0].Amount = halfDims.x * halfDims.y * 4;
             requirements[0].Category = EnvironmentRequirements.RequirementCategory.WallSurfaceArea;
             return requirements;
@@ -203,7 +203,7 @@ namespace GameMechanism
         public static EnvironmentRequirements.Requirement[] OnCeiling(Vector3 halfDims)
         {
             EnvironmentRequirements.Requirement[] requirements = new EnvironmentRequirements.Requirement[1];
-            requirements[0].GreaterThanOrEqual = true;
+            requirements[0].Minimum = true;
             requirements[0].Amount = halfDims.x * halfDims.z * 4;
             requirements[0].Category = EnvironmentRequirements.RequirementCategory.CeilingSurfaceArea;
             return requirements;
@@ -212,7 +212,7 @@ namespace GameMechanism
         public static EnvironmentRequirements.Requirement[] OnEdge(Vector3 halfDims)
         {
             EnvironmentRequirements.Requirement[] requirements = new EnvironmentRequirements.Requirement[1];
-            requirements[0].GreaterThanOrEqual = true;
+            requirements[0].Minimum = true;
             requirements[0].Amount = halfDims.x * halfDims.z * 4;
             requirements[0].Category = EnvironmentRequirements.RequirementCategory.PlatformSurfaceArea;
             return requirements;
@@ -221,10 +221,10 @@ namespace GameMechanism
         public static EnvironmentRequirements.Requirement[] OnFloorAndCeiling(Vector3 halfDims)
         {
             EnvironmentRequirements.Requirement[] requirements = new EnvironmentRequirements.Requirement[2];
-            requirements[0].GreaterThanOrEqual = true;
+            requirements[0].Minimum = true;
             requirements[0].Amount = halfDims.x * halfDims.z * 4;
             requirements[0].Category = EnvironmentRequirements.RequirementCategory.HorizSurfaceArea;
-            requirements[1].GreaterThanOrEqual = true;
+            requirements[1].Minimum = true;
             requirements[1].Amount = halfDims.x * halfDims.z * 4;
             requirements[1].Category = EnvironmentRequirements.RequirementCategory.CeilingSurfaceArea;
             return requirements;

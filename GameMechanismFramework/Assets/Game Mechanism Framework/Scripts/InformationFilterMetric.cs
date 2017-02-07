@@ -4,23 +4,28 @@ using UnityEngine;
 
 namespace GameMechanism
 {
-    public abstract class InformationFilterMetric
+    public abstract class InformationFilterMetric : MonoBehaviour
     {
-        private bool _updatedFlag = false;
         private float _currentValue;
+        public float TimeBetweenUpdates=0.1f;
 
         public float GetCurrentValue()
         {
-            if (!_updatedFlag)
-            {
-                _currentValue = GetNewestValue();
-            }
             return _currentValue;
         }
 
-        private void Update()
+        public virtual void Start()
         {
-            _updatedFlag = false;
+            StartCoroutine(UpdateCurrentValue());
+        }
+
+        private IEnumerator UpdateCurrentValue()
+        {
+            for (;;)
+            {
+                _currentValue=GetNewestValue();
+                yield return new WaitForSeconds(TimeBetweenUpdates);
+            }
         }
 
         protected abstract float GetNewestValue();

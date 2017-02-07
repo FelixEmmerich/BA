@@ -41,7 +41,7 @@ namespace GameMechanism
             public float Amount;
 
             [Tooltip("How required amount is compared to actual amount. If false, a value lower than Amount is required.")]
-            public bool GreaterThanOrEqual;
+            public bool Minimum;
         }
 
         public Requirement[] Requirements;
@@ -124,7 +124,7 @@ namespace GameMechanism
         /// <returns></returns>
         public bool CheckRequirement(float amount, Requirement requirement)
         {
-            return amount >= 0 && ((amount >= requirement.Amount) == requirement.GreaterThanOrEqual);
+            return amount >= 0 && ((amount >= requirement.Amount) == requirement.Minimum);
         }
 
         /// <summary>
