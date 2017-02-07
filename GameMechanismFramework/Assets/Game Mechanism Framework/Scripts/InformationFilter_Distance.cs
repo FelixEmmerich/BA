@@ -36,6 +36,8 @@ namespace GameMechanism
         // Use this for initialization
         void Start()
         {
+            BubbleSort(Filters);
+
             _previouslyWithinRanges = new bool[Filters.Length];
             for (int i = _previouslyWithinRanges.Length - 1; i >= 0; i--)
             {
@@ -69,6 +71,24 @@ namespace GameMechanism
                 {
                     (withinRange ? Filters[i].WithinRangeEvent : Filters[i].OutsideRangeEvent).Invoke();
                     _previouslyWithinRanges[i] = withinRange;
+                }
+            }
+        }
+
+        public void BubbleSort(Filter[] filters)
+        {
+            Filter temp;
+
+            for (int i = 0; i < filters.Length; i++)
+            {
+                for (int j = 0; j < filters.Length - 1; j++)
+                {
+                    if (filters[j].MaxDistance < filters[j + 1].MaxDistance)
+                    {
+                        temp = filters[j + 1];
+                        filters[j + 1] = filters[j];
+                        filters[j] = temp;
+                    }
                 }
             }
         }
