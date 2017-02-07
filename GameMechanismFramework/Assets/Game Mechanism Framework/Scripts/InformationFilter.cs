@@ -46,9 +46,10 @@ namespace GameMechanism
 
                 for (int j = 0; j < RuleSets[i].Conditions.Length; j++)
                 {
+                    Condition condition = RuleSets[i].Conditions[j];
+                    float actualValue = condition.Metric.GetCurrentValue();
                     //Check if actual value behaves to required value as necessary
-                    bool conditionMet = (RuleSets[i].Conditions[j].Metric.GetCurrentValue() >= RuleSets[i].Conditions[j].Value) !=
-                                        RuleSets[i].Conditions[j].Minimum;
+                    bool conditionMet = (actualValue>=0) && (actualValue >= condition.Value == condition.Minimum);
 
                     //Add metrics to appropriate lists in case the
                     if (conditionMet == false)

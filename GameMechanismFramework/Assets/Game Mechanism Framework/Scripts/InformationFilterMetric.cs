@@ -6,7 +6,7 @@ namespace GameMechanism
 {
     public abstract class InformationFilterMetric : MonoBehaviour
     {
-        private float _currentValue;
+        private float _currentValue=-1;
         public float TimeBetweenUpdates=0.1f;
 
         public float GetCurrentValue()

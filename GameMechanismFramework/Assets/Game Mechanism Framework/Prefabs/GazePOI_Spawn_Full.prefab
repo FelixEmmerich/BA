@@ -62,7 +62,8 @@ GameObject:
   - component: {fileID: 114412350001219238}
   - component: {fileID: 114044037165617986}
   - component: {fileID: 114062317174482174}
-  - component: {fileID: 114034290199186614}
+  - component: {fileID: 114484655247581640}
+  - component: {fileID: 114338437055061922}
   m_Layer: 31
   m_Name: GazePOI_Spawn_Full
   m_TagString: Untagged
@@ -134,54 +135,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114034290199186614
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1856898716889386}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77d542b5741f39e4e88f75f3e13e6dad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Filters:
-  - MaxDistance: 50
-    MinDistance: 3
-    WithinRangeEvent:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 114412350001219238}
-          m_MethodName: SetEnabled
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-    OutsideRangeEvent:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 114412350001219238}
-          m_MethodName: SetEnabled
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-  Use2DDistance: 1
-  TimeBetweenUpdates: 0.1
 --- !u!114 &114044037165617986
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -323,6 +276,20 @@ MonoBehaviour:
   Image: {fileID: 114776986311788736}
   Active: 0
   TransitionTime: 0
+--- !u!114 &114338437055061922
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1856898716889386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b832c5c4b9603948a69291c817be66a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TimeBetweenUpdates: 0.1
+  Use2DDistance: 1
+  ReferencePoint: {fileID: 0}
 --- !u!114 &114396552104569844
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -373,6 +340,55 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114484655247581640
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1856898716889386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e412f0227f60d34d81495002f32fbe7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RuleSets:
+  - Conditions:
+    - Metric: {fileID: 114338437055061922}
+      Value: 3
+      Minimum: 1
+    ConditionsMet:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114412350001219238}
+          m_MethodName: SetEnabled
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+    ConditionsNotMet:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114412350001219238}
+          m_MethodName: SetEnabled
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+    Previouslytrue: 0
 --- !u!114 &114776986311788736
 MonoBehaviour:
   m_ObjectHideFlags: 1
