@@ -1,4 +1,4 @@
-The framework consists of eleven core scripts and a few helper classes 
+The framework consists of 13 core scripts and a few helper classes 
 (which are applied in the example scenes or can be used for testing but are not essential or are heavily based on existing scripts). 
 
 Interactable, InteractableCheck_Gaze, and InteractableCheck_Position together form the basis for the mechanisms POINT OF INTEREST and GAZE POINT OF INTEREST. 
@@ -17,6 +17,6 @@ e.g. on a wall or on a floor, far from the player.
 EnvironmentRequirementsFromUnderstandingSpawner provides a bridge between the two previous mechanisms 
 by generating simple requirements from the parameters of a SpatialUnderstandingSpawner.
 
-Finally, InformationFilter_Distance is – as the name suggests – a variant on INFORMATION FILTERING, 
-based on the distance between the user and an object (and thus an alternative approach to POINT OF INTEREST). 
-Events are invoked when the user enters or leaves certain ranges.
+Finally, InformationFilter is, as the name suggests, an implementation of INFORMATION FILTERING, 
+executing tasks according to rules based on the data from InformationFilterMetric-derived classes, 
+such as IFMetric_Distance, which takes into account the distance between the object it is placed on and e.g. the player.
