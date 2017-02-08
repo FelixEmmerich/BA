@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="GameMechanism.EnvironmentRequirementGUI" Collapsed="true">
-    <Position X="8.25" Y="4" Width="2.25" />
+    <Position X="2.25" Y="6.5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAQggIAACAAAQAgEAAAACAAEAIESAAAACAAAAIAAAA=</HashCode>
       <FileName>Assets\Game Mechanism Framework\Scripts\EnvironmentRequirementGUI.cs</FileName>
@@ -11,17 +11,10 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="GameMechanism.EnvironmentRequirements" Collapsed="true">
-    <Position X="8.25" Y="2.5" Width="2" />
+    <Position X="4.5" Y="5.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAABACAAAAAAKAABAAAAAAIAAAAAAAIAAgAAAgA=</HashCode>
       <FileName>Assets\Game Mechanism Framework\Scripts\EnvironmentRequirements.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="GameMechanism.InformationFilter_Distance" Collapsed="true">
-    <Position X="4.75" Y="4.25" Width="2.25" />
-    <TypeIdentifier>
-      <HashCode>AQAAAECAACAAAAAAAIAAAAAAAAAABAAAAIAAAAAAAAA=</HashCode>
-      <FileName>Assets\Game Mechanism Framework\Scripts\InformationFilter_Distance.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GameMechanism.Interactable" Collapsed="true">
@@ -63,29 +56,65 @@
     </TypeIdentifier>
   </Class>
   <Class Name="GameMechanism.SpatialUnderstandingSpawner" Collapsed="true">
-    <Position X="10.75" Y="2.5" Width="2.5" />
+    <Position X="7.25" Y="5.75" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAIAAACAAAAAAAg2ACIABAAAAAAAAAAIAAAAAgAA=</HashCode>
+      <HashCode>ABAAEIAAACAAAAAAAA0AAgABAAAAABAAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\Game Mechanism Framework\Scripts\SpatialUnderstandingSpawner.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GameMechanism.SpawnInformation" Collapsed="true">
-    <Position X="11" Y="3.5" Width="1.75" />
+    <Position X="10" Y="5.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAEAAQgAAAAAAAAABAAQgAAAAAAAAkQBAQAAAAAAAAA=</HashCode>
       <FileName>Assets\Game Mechanism Framework\Scripts\SpawnInformation.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GameMechanism.EnvironmentRequirementsFromUnderstandingSpawner" Collapsed="true">
-    <Position X="8.75" Y="0.5" Width="3.75" />
+    <Position X="5" Y="4.5" Width="3.75" />
     <TypeIdentifier>
-      <HashCode>AAEAAAAAACQAAAAABAAAAAgAAAIAAEUBAAAAAAAAAAA=</HashCode>
+      <HashCode>AAEAAAAAACAAAAAAFAgAAAgAAAAAAEUFBABgAAAAAAA=</HashCode>
       <FileName>Assets\Game Mechanism Framework\Scripts\EnvironmentRequirementsFromUnderstandingSpawner.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="Spawner" />
-      <Field Name="Requirements" />
+      <Field Name="RequirementsRef" />
+      <Field Name="SpawnerRef" />
     </ShowAsAssociation>
+  </Class>
+  <Class Name="GameMechanism.InformationFilter" Collapsed="true">
+    <Position X="10.5" Y="1.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Struct Name="GameMechanism.InformationFilter.Condition" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Game Mechanism Framework\Scripts\InformationFilter.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+      <Struct Name="GameMechanism.InformationFilter.RuleSet" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Game Mechanism Framework\Scripts\InformationFilter.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Struct>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAgAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Game Mechanism Framework\Scripts\InformationFilter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameMechanism.IFMetric_Distance" Collapsed="true">
+    <Position X="8.5" Y="2.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ABAAAEAAACAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Game Mechanism Framework\Scripts\IFMetric_Distance.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameMechanism.InformationFilterMetric" Collapsed="true">
+    <Position X="8.5" Y="1.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACEACAAAAAAAAAAAAAAAEAAAAAAEAAAAAAABAA=</HashCode>
+      <FileName>Assets\Game Mechanism Framework\Scripts\InformationFilterMetric.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
